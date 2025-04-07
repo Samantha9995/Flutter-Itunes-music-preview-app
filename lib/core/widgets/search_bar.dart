@@ -3,9 +3,11 @@ import 'package:itunes_music_app/core/utils/constants.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
 
 class SearchMusicBar extends StatelessWidget {
-  final SearchMusicController controller;
+  const SearchMusicBar(
+      {super.key, required this.controller, required this.onSearchTextChanged});
 
-  const SearchMusicBar({super.key, required this.controller});
+  final SearchMusicController controller;
+  final ValueChanged<String> onSearchTextChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class SearchMusicBar extends StatelessWidget {
           ),
         ),
         onChanged: (value) {
-          controller.performSearch(value);
+          onSearchTextChanged(value);
         },
         style: Theme.of(context).textTheme.bodyMedium,
       ),
