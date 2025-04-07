@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -27,7 +28,7 @@ class SearchPage extends StatelessWidget {
         builder: (context, text, child) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('iTunes music search'),
+              title: const Text('itunes_music_search').tr(),
             ),
             body: Column(
               children: [
@@ -48,7 +49,7 @@ class SearchPage extends StatelessWidget {
                         child: CustomText(
                             'Error: ${controller.errorMessage.value}'));
                   } else if (controller.searchResults.isEmpty) {
-                    return const Center(child: CustomText('No results found'));
+                    return const Center(child: CustomText('no_result'));
                   } else {
                     return Expanded(
                       child: ListView.builder(

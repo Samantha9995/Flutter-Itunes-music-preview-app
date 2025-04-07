@@ -2,10 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:itunes_music_app/core/di/service_locator.dart';
 import 'package:itunes_music_app/core/theme/itunes_theme.dart';
 import 'package:itunes_music_app/features/search/views/search_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-void main() {
+void main() async {
   setupServiceLocator();
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale('en', 'US'),
+        Locale('zh', 'TW')
+      ],
+      path: 'langs', 
+      fallbackLocale: const Locale('en', 'US'), 
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,6 +29,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: iTunesTheme(),
       home: SearchPage(),
     );

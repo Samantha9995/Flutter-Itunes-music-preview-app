@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
@@ -13,6 +14,6 @@ class CustomText extends StatelessWidget {
     return Text(
       text,
       style: style ?? defaultStyle,
-    );
+    ).tr();
   }
 }

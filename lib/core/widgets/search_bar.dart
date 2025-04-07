@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:itunes_music_app/core/utils/constants.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
 
@@ -15,7 +16,7 @@ class SearchMusicBar extends StatelessWidget {
       padding: const EdgeInsets.all(defaultPadding),
       child: TextField(
         decoration: InputDecoration(
-          hintText: 'Search Music',
+          hintText: context.tr('search_music'),
           prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius),
