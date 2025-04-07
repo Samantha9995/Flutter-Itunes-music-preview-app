@@ -2,6 +2,9 @@
 
 This is a Flutter app that allows users to search for music on iTunes and play previews.
 
+![Uploading Simulator Screen Recording - iPhone SE (3rd generation) - 2025-04-07 at 17.29.05.gif…]()
+
+
 ## Features
 
 *   Search for music by keyword
