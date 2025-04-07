@@ -57,6 +57,7 @@ This is a Flutter app that allows users to search for music on iTunes and play p
     ```
 
 ## Project Structure
+```
 itunes_music_app/
 ├── lib/
 │ ├── core/
@@ -86,7 +87,7 @@ itunes_music_app/
 ├── pubspec.yaml # Project dependencies and configuration
 ├── README.md # Project documentation
 └── ...
-
+```
 
 ## State Management
 
