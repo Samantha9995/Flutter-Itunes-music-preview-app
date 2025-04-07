@@ -2,11 +2,24 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:itunes_music_app/core/models/search_result.dart';
 
+/// Repository for performing music searches using the iTunes API.
+///
+/// This repository handles the network requests to the iTunes API,
+/// parses the JSON response, and returns a list of [SearchResult] objects.
+
 class SearchRepository {
+    /// The Dio client for making HTTP requests.
   final Dio dio;
+    /// The base URL for the iTunes API.
   final String baseUrl = 'https://itunes.apple.com';
 
+  /// Constructor that requires a [Dio] client.
   SearchRepository({required this.dio});
+
+  /// Searches for music with the given [searchTerm] using the iTunes API.
+  ///
+  /// Returns a list of [SearchResult] objects if the search is successful.
+  /// Throws an exception if the search fails.
 
   Future<List<SearchResult>> searchMusic(String searchTerm) async {
     try {

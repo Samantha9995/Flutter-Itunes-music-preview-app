@@ -6,6 +6,13 @@ import 'package:itunes_music_app/core/widgets/search_result_tile.dart';
 import 'package:itunes_music_app/core/widgets/search_bar.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
 
+/// Search page for displaying the interface to search music.
+///
+/// This page contains a search field for entering search keywords,
+/// and a search results list for displaying music that matches the search criteria.
+///
+/// Uses `SearchMusicController` to manage search logic and state.
+
 class SearchPage extends StatelessWidget {
   SearchPage({super.key});
 
@@ -63,6 +70,10 @@ class SearchPage extends StatelessWidget {
         });
   }
 }
+
+/// Class for debouncing function calls.
+///
+/// This class can delay the call of a function until after a specified delay has elapsed.
 
 class Debounce {
   final Duration delay;
