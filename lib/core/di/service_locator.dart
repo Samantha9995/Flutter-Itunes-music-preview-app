@@ -9,9 +9,6 @@ import 'package:itunes_music_app/features/search/controllers/search_controller.d
 final GetIt locator = GetIt.instance;
 
 void setupServiceLocator() {
-  // // API Services
-  // locator.registerLazySingleton<ITunesApiService>(() => ITunesApiService());
-
   setUpDio();
 
   locator.registerSingleton<SearchRepository>(
