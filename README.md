@@ -9,6 +9,7 @@ This is a Flutter app that allows users to search for music on iTunes and play p
 *   Play music previews
 *   Error handling for network issues and invalid search terms
 *   Clean and responsive UI
+*   Internationalization (i18n) and Localization (l10n) using the Easy localization
 
 ## Technologies Used
 
@@ -18,6 +19,7 @@ This is a Flutter app that allows users to search for music on iTunes and play p
 *   GetIt
 *   Dio (HTTP client)
 *   Just Audio (audio playback)
+*   Easy localization
 
 ## Getting Started
 
