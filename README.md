@@ -1,4 +1,4 @@
-# iTunes Music Search App
+# [Flutter] iTunes Music Search App
 
 This is a Flutter app that allows users to search for music on iTunes and play previews.
 
