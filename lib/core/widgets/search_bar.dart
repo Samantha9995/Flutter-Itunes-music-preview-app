@@ -4,11 +4,16 @@ import 'package:itunes_music_app/core/utils/constants.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
 
 class SearchMusicBar extends StatefulWidget {
-  const SearchMusicBar(
-      {super.key, required this.controller, required this.onSearchTextChanged});
+  const SearchMusicBar({
+    super.key, 
+    required this.controller, 
+    required this.onSearchTextChanged,
+    required this.focusNode,
+  });
 
   final SearchMusicController controller;
   final ValueChanged<String> onSearchTextChanged;
+  final FocusNode focusNode;
 
   @override
   State<SearchMusicBar> createState() => _SearchMusicBarState();
@@ -16,18 +21,23 @@ class SearchMusicBar extends StatefulWidget {
 
 class _SearchMusicBarState extends State<SearchMusicBar> {
   
-  final FocusNode _focusNode = FocusNode();
+  final TextEditingController _searchBarTextFieldController = TextEditingController();
   bool _showSuggestions = false;
 
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(() {
-
+    widget.focusNode.addListener(() {
       setState(() {
-        _showSuggestions = _focusNode.hasFocus;
+        _showSuggestions = widget.focusNode.hasFocus;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    _searchBarTextFieldController.dispose();
+    super.dispose();
   }
 
   @override
@@ -37,7 +47,8 @@ class _SearchMusicBarState extends State<SearchMusicBar> {
       child: Column(
         children: [
           TextField(
-            focusNode: _focusNode,
+            focusNode: widget.focusNode,
+            controller: _searchBarTextFieldController,
             decoration: InputDecoration(
               hintText: context.tr('search_music'),
               prefixIcon: const Icon(Icons.search),
@@ -60,11 +71,14 @@ class _SearchMusicBarState extends State<SearchMusicBar> {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 5,
+                itemCount: 3,
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text("$index"),
                     onTap: () {
+                      _searchBarTextFieldController.text = "$index";
+                      widget.onSearchTextChanged("$index");
+                      widget.focusNode.unfocus();
                     },
                   );
                 },

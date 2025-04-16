@@ -20,13 +20,18 @@ class SearchPage extends StatelessWidget {
   final SearchMusicController controller = Get.find();
   final _searchText = ValueNotifier<String>('');
   final _debounce = Debounce(delay: const Duration(milliseconds: 500));
+  final FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<String>(
         valueListenable: _searchText,
         builder: (context, text, child) {
-          return Scaffold(
+          return GestureDetector(
+            onTap: () {
+              _focusNode.unfocus();
+            },
+            child: Scaffold(
             appBar: AppBar(
               title: const Text('itunes_music_search').tr(),
             ),
@@ -40,6 +45,7 @@ class SearchPage extends StatelessWidget {
                       controller.performSearch(text);
                     });
                   },
+                  focusNode: _focusNode,
                 ),
                 Obx(() {
                   if (controller.isLoading.value) {
@@ -67,6 +73,7 @@ class SearchPage extends StatelessWidget {
                 }),
               ],
             ),
+           )
           );
         });
   }
