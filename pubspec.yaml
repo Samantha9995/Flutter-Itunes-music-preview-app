@@ -40,6 +40,9 @@ dependencies:
   get_it: ^7.6.0
   just_audio: ^0.9.36
   easy_localization: ^3.0.7+1
+  hive: ^2.0.0  # Use the latest version
+  hive_flutter: ^1.0.0 # Use the latest version
+  path_provider: ^2.0.0 # Ensure you have path_provider for Hive initialization
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +54,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  hive_generator: ^1.0.0 # Use the latest version
+  build_runner: ^2.0.0  # Use the latest version
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

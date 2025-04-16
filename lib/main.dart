@@ -3,11 +3,19 @@ import 'package:itunes_music_app/core/di/service_locator.dart';
 import 'package:itunes_music_app/core/theme/itunes_theme.dart';
 import 'package:itunes_music_app/features/search/views/search_page.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:itunes_music_app/core/models/search_history.dart';
 
 void main() async {
   setupServiceLocator();
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  // Initialize Hive
+  await Hive.initFlutter();
+
+  // Register the adapter
+  Hive.registerAdapter(SearchHistoryModelAdapter());
 
   runApp(
     EasyLocalization(
@@ -33,7 +41,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: iTunesTheme(),
-      home: SearchPage(),
+      home: const SearchPage(),
     );
   }
 }
