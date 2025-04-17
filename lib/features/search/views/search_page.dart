@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:itunes_music_app/core/di/service_locator.dart';
 import 'dart:async';
 import 'package:itunes_music_app/core/widgets/custom_text.dart';
 import 'package:itunes_music_app/core/widgets/search_result_tile.dart';
@@ -17,7 +18,7 @@ import 'package:itunes_music_app/features/search/controllers/search_controller.d
 class SearchPage extends StatelessWidget {
   SearchPage({super.key});
 
-  final SearchMusicController controller = Get.find();
+  final SearchMusicController controller = locator<SearchMusicController>();
   final _searchText = ValueNotifier<String>('');
   final _debounce = Debounce(delay: const Duration(milliseconds: 500));
   final FocusNode _focusNode = FocusNode();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:itunes_music_app/core/models/search_history.dart';
 import 'package:itunes_music_app/core/utils/constants.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
 
@@ -22,15 +23,19 @@ class SearchMusicBar extends StatefulWidget {
 class _SearchMusicBarState extends State<SearchMusicBar> {
   
   final TextEditingController _searchBarTextFieldController = TextEditingController();
+  /// Boolean to control the visibility of suggestions
   bool _showSuggestions = false;
 
   @override
   void initState() {
     super.initState();
     widget.focusNode.addListener(() {
-      setState(() {
         _showSuggestions = widget.focusNode.hasFocus;
-      });
+        setState(() {});
+    });
+
+    setState(() {
+      widget.controller.getLastedtSearchHistory();
     });
   }
 
@@ -57,6 +62,9 @@ class _SearchMusicBarState extends State<SearchMusicBar> {
               ),
             ),
             onChanged: (value) {
+              widget.controller.findSearchHistory(value);
+              setState(() {});
+
               widget.onSearchTextChanged(value);
             },
             style: Theme.of(context).textTheme.bodyMedium,
@@ -71,13 +79,14 @@ class _SearchMusicBarState extends State<SearchMusicBar> {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 3,
+                itemCount: widget.controller.searchHistory.length,
                 itemBuilder: (context, index) {
+                  String searchTerm = widget.controller.searchHistory[index].searchTerm;
                   return ListTile(
-                    title: Text("$index"),
+                    title: Text(searchTerm),
                     onTap: () {
-                      _searchBarTextFieldController.text = "$index";
-                      widget.onSearchTextChanged("$index");
+                      _searchBarTextFieldController.text = searchTerm;
+                      widget.onSearchTextChanged(searchTerm);
                       widget.focusNode.unfocus();
                     },
                   );
