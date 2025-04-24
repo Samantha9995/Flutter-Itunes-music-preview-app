@@ -17,7 +17,7 @@ class SearchResultTile extends StatelessWidget {
       trailing: IconButton(
         icon: const Icon(Icons.play_arrow),
         onPressed: () {
-          controller.playPreview(result.previewUrl);
+          controller.playPreview(result);
         },
       ),
     );

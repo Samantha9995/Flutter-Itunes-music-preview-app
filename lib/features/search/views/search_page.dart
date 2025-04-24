@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:itunes_music_app/core/di/service_locator.dart';
 import 'dart:async';
 import 'package:itunes_music_app/core/widgets/custom_text.dart';
+import 'package:itunes_music_app/core/widgets/music_player.dart';
 import 'package:itunes_music_app/core/widgets/search_result_tile.dart';
 import 'package:itunes_music_app/core/widgets/search_bar.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
@@ -48,30 +49,35 @@ class SearchPage extends StatelessWidget {
                   },
                   focusNode: _focusNode,
                 ),
+                Expanded(
+                  child: Obx(() {
+                    if (controller.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (controller.errorMessage.value.isNotEmpty) {
+                      return Center(
+                          child: CustomText(
+                              'Error: ${controller.errorMessage.value}'));
+                    } else if (controller.searchResults.isEmpty) {
+                      return const Center(child: CustomText('no_result'));
+                    } else {
+                      return ListView.builder(
+                          itemCount: controller.searchResults.length,
+                          itemBuilder: (context, index) {
+                            final result = controller.searchResults[index];
+                            return SearchResultTile(
+                              result: result,
+                              controller: controller,
+                            );
+                          },
+                        );
+                    }
+                  }),
+                ),
                 Obx(() {
-                  if (controller.isLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (controller.errorMessage.value.isNotEmpty) {
-                    return Center(
-                        child: CustomText(
-                            'Error: ${controller.errorMessage.value}'));
-                  } else if (controller.searchResults.isEmpty) {
-                    return const Center(child: CustomText('no_result'));
-                  } else {
-                    return Expanded(
-                      child: ListView.builder(
-                        itemCount: controller.searchResults.length,
-                        itemBuilder: (context, index) {
-                          final result = controller.searchResults[index];
-                          return SearchResultTile(
-                            result: result,
-                            controller: controller,
-                          );
-                        },
-                      ),
-                    );
-                  }
-                }),
+                  return MusicPlayer(
+                    result: controller.previewingResult.value, 
+                    isPlaying: controller.isPlaying.value);
+                })
               ],
             ),
            )

@@ -27,6 +27,13 @@ class SearchMusicController extends GetxController {
   /// the search results change.
   final searchResults = <SearchResult>[].obs;
 
+  final previewingResult = SearchResult(
+    trackName: 'Select a song to play',
+    artistName: '',
+    artworkUrl100: '',
+    previewUrl: '',
+  ).obs;
+
   /// A list of [SearchHistoryModel] objects representing the user's
   /// search history.
   List<SearchHistoryModel> searchHistory = [];
@@ -45,6 +52,8 @@ class SearchMusicController extends GetxController {
 
   /// The audio player used to play music previews.
   final player = AudioPlayer();
+
+  RxBool isPlaying = false.obs;
 
   @override
   void onClose() {
@@ -96,10 +105,13 @@ class SearchMusicController extends GetxController {
   ///
   /// Handles potential errors during playback and updates the [errorMessage]
   /// observable if an error occurs.
-  Future<void> playPreview(String previewUrl) async {
+  Future<void> playPreview(SearchResult result) async {
+    previewingResult.value = result;
+    var previewUrl = result.previewUrl;
     try {
       await player.setUrl(previewUrl);
       player.play();
+      isPlaying.value = true;
     } catch (e) {
       print('Error playing preview: $e');
       errorMessage.value = 'Failed to play preview';
@@ -109,5 +121,11 @@ class SearchMusicController extends GetxController {
   /// Stops the music preview.
   void stopPreview() {
     player.stop();
+    isPlaying.value = false;
+  }
+
+  void pausePreview() {
+    player.pause();
+    isPlaying.value = false;
   }
 }
