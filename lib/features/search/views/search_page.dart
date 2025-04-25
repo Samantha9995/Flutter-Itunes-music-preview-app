@@ -74,9 +74,13 @@ class SearchPage extends StatelessWidget {
                   }),
                 ),
                 Obx(() {
-                  return MusicPlayer(
-                    result: controller.previewingResult.value, 
-                    isPlaying: controller.isPlaying.value);
+                  if (controller.previewingResult.value.previewUrl.isEmpty) {
+                    return Container();
+                  } else {
+                    return MusicPlayer(
+                      result: controller.previewingResult.value, 
+                      isPlaying: controller.isPlaying.value);
+                  }
                 })
               ],
             ),
