@@ -16,37 +16,17 @@ class MusicPlayer extends StatefulWidget {
 }
 
 class _MusicPlayerState extends State<MusicPlayer> {
-  final AudioPlayer _player = AudioPlayer();
   final SearchMusicController controller = locator<SearchMusicController>();
 
 
   @override
   void initState() {
     super.initState();
-    _init();
-  }
-
-  Future<void> _init() async {
-    if (widget.result.previewUrl != null) {
-      try {
-        await _player.setUrl(widget.result.previewUrl!);
-      } catch (e) {
-        print("Error loading audio source: $e");
-      }
-    }
-  }
-
-  @override
-  void didUpdateWidget(covariant MusicPlayer oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.result.previewUrl != oldWidget.result.previewUrl) {
-      _init();
-    }
   }
 
   @override
   void dispose() {
-    _player.dispose();
+    controller.onClose();
     super.dispose();
   }
 

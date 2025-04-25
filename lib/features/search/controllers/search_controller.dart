@@ -54,6 +54,7 @@ class SearchMusicController extends GetxController {
   final player = AudioPlayer();
 
   RxBool isPlaying = false.obs;
+  bool isPaused = false;
 
   @override
   void onClose() {
@@ -106,12 +107,16 @@ class SearchMusicController extends GetxController {
   /// Handles potential errors during playback and updates the [errorMessage]
   /// observable if an error occurs.
   Future<void> playPreview(SearchResult result) async {
-    previewingResult.value = result;
-    var previewUrl = result.previewUrl;
+    var newPreviewUrl = result.previewUrl;
     try {
-      await player.setUrl(previewUrl);
+      if (!isPaused || previewingResult.value.previewUrl != newPreviewUrl) {
+        await player.setUrl(newPreviewUrl);
+      } 
       player.play();
       isPlaying.value = true;
+      isPaused = false;
+      previewingResult.value = result;
+
     } catch (e) {
       print('Error playing preview: $e');
       errorMessage.value = 'Failed to play preview';
@@ -126,6 +131,7 @@ class SearchMusicController extends GetxController {
 
   void pausePreview() {
     player.pause();
+    isPaused = true;
     isPlaying.value = false;
   }
 }
