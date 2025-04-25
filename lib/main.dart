@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:itunes_music_app/core/di/service_locator.dart';
 import 'package:itunes_music_app/core/theme/itunes_theme.dart';
 import 'package:itunes_music_app/features/search/views/search_page.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

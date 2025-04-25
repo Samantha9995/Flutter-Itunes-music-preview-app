@@ -43,6 +43,7 @@ dependencies:
   hive: ^2.0.0  # Use the latest version
   hive_flutter: ^1.0.0 # Use the latest version
   path_provider: ^2.0.0 # Ensure you have path_provider for Hive initialization
+  url_launcher: ^6.2.5 # Use the latest version
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +72,7 @@ flutter:
   generate: true
   assets:
     - langs/
+    - assets/images/github_icon.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

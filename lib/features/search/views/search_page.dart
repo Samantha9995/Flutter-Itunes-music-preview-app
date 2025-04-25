@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itunes_music_app/core/di/service_locator.dart';
+import 'package:itunes_music_app/core/widgets/about_me.dart';
 import 'dart:async';
 import 'package:itunes_music_app/core/widgets/custom_text.dart';
 import 'package:itunes_music_app/core/widgets/music_player.dart';
@@ -36,6 +37,21 @@ class SearchPage extends StatelessWidget {
             child: Scaffold(
             appBar: AppBar(
               title: const Text('itunes_music_search').tr(),
+              actions: [
+                PopupMenuButton<String>(
+                  onSelected: (value) {
+                    if (value == 'about') {
+                      Get.to(() => const AboutMePage());
+                    }
+                  },
+                  itemBuilder: (BuildContext context) => [
+                    PopupMenuItem<String>(
+                      value: 'about',
+                      child: const Text('About the Developer').tr(),
+                    ),
+                  ],
+                ),
+              ],
             ),
             body: Column(
               children: [
