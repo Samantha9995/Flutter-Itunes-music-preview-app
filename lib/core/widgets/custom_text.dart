@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 class CustomText extends StatelessWidget {
   final String text;
   final TextStyle? style;

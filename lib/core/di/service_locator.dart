@@ -5,6 +5,8 @@ import 'package:itunes_music_app/features/search/controllers/search_controller.d
 
 import 'package:itunes_music_app/core/services/hive_service.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 final GetIt locator = GetIt.instance;
 
 void setupServiceLocator() {

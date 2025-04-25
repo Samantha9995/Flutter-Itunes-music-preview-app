@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+// Copyright (c) 2025 SADev. All rights reserved.
 
 class AboutMePage extends StatelessWidget {
   const AboutMePage({super.key});
@@ -8,7 +11,7 @@ class AboutMePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About the Developer'),
+        title: const Text('about_the_developer').tr(),
       ),
       body: Center(
         child: Column(
@@ -25,7 +28,7 @@ class AboutMePage extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 32.0),
               child: Text(
-                "Hey! I'm Samantha, an Android & Flutter Developer working on this iTunes music preview app. I'm passionate about building great mobile experiences and love discovering new music. Feel free to reach out! Check out my GitHub and I hope you enjoy using the app!",
+                "Hey! I'm Samantha, an Android & Flutter Developer working on this iTunes music preview app. I'm passionate about building great mobile experiences and love discovering new music. Feel free to reach out! Check out my GitHub and I hope you enjoy using this app!",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14),
               ),

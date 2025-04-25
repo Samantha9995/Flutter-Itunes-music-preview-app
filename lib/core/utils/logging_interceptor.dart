@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 class LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

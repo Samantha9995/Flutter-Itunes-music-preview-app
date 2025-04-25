@@ -4,6 +4,8 @@ import 'package:itunes_music_app/core/models/search_history.dart';
 import 'package:itunes_music_app/core/utils/constants.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 class SearchMusicBar extends StatefulWidget {
   const SearchMusicBar({
     super.key, 

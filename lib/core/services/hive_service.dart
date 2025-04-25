@@ -2,6 +2,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:itunes_music_app/core/models/search_history.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 class HiveService {
   static const String searchHistoryBoxName = 'searchHistory';
 

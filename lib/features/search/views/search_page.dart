@@ -10,6 +10,8 @@ import 'package:itunes_music_app/core/widgets/search_result_tile.dart';
 import 'package:itunes_music_app/core/widgets/search_bar.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 /// Search page for displaying the interface to search music.
 ///
 /// This page contains a search field for entering search keywords,
@@ -47,7 +49,7 @@ class SearchPage extends StatelessWidget {
                   itemBuilder: (BuildContext context) => [
                     PopupMenuItem<String>(
                       value: 'about',
-                      child: const Text('About the Developer').tr(),
+                      child: const Text('about_the_developer').tr(),
                     ),
                   ],
                 ),
@@ -81,6 +83,7 @@ class SearchPage extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final result = controller.searchResults[index];
                             return SearchResultTile(
+                              key: ValueKey(result.trackId.toString()),
                               result: result,
                               controller: controller,
                             );
@@ -94,8 +97,8 @@ class SearchPage extends StatelessWidget {
                     return Container();
                   } else {
                     return MusicPlayer(
-                      result: controller.previewingResult.value, 
-                      isPlaying: controller.isPlaying.value);
+                      result: controller.previewingResult.value
+                      );
                   }
                 })
               ],

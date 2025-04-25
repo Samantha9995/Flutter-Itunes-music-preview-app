@@ -5,11 +5,12 @@ import 'package:itunes_music_app/core/models/search_result.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
 import 'package:just_audio/just_audio.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 class MusicPlayer extends StatefulWidget {
   final SearchResult result;
-  bool isPlaying;
 
-  MusicPlayer({super.key, required this.result, required this.isPlaying});
+  MusicPlayer({super.key, required this.result});
 
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
@@ -33,7 +34,14 @@ class _MusicPlayerState extends State<MusicPlayer> {
   @override
   Widget build(BuildContext context) {
      final ThemeData theme = Theme.of(context);
-    
+
+    final isPlaying = controller.isPlayingPreviewMap[widget.result.trackId]?.value ?? false;
+    print('---MusicPlayer---');
+    print('isPlaying: ' + isPlaying.toString());
+    print('trackId: ' + widget.result.trackId);
+    print('trackName: ' + widget.result.trackName);
+    print('---MusicPlayer---End---');
+  
     return Container(
       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
       decoration: BoxDecoration(
@@ -79,16 +87,15 @@ class _MusicPlayerState extends State<MusicPlayer> {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
-              icon: Icon(widget.isPlaying ? Icons.pause : Icons.play_arrow),
+              icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
               color: Colors.grey[800],
               onPressed: () {
                 setState(() {
-                  if (widget.isPlaying) {
-                    controller.pausePreview();
+                  if (isPlaying) {
+                    controller.pausePreview(widget.result);
                   } else {
                     controller.playPreview(widget.result);
                   }
-                  widget.isPlaying = !widget.isPlaying;
                 });
               },
             ),

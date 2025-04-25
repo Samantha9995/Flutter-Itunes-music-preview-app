@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 ThemeData iTunesTheme() {
   return ThemeData(
 

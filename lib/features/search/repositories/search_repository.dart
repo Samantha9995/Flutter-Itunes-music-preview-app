@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:itunes_music_app/core/models/search_result.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 /// Repository for performing music searches using the iTunes API.
 ///
 /// This repository handles the network requests to the iTunes API,

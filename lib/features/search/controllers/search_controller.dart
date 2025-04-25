@@ -6,6 +6,8 @@ import 'package:itunes_music_app/features/search/repositories/search_repository.
 import 'package:itunes_music_app/core/models/search_result.dart';
 import 'package:just_audio/just_audio.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 /// Manages the search music functionality, including searching,
 /// managing results, handling loading and errors, and controlling
 /// audio playback.
@@ -28,6 +30,7 @@ class SearchMusicController extends GetxController {
   final searchResults = <SearchResult>[].obs;
 
   final previewingResult = SearchResult(
+    trackId: '0',
     trackName: 'Select a song to play',
     artistName: '',
     artworkUrl100: '',
@@ -53,8 +56,12 @@ class SearchMusicController extends GetxController {
   /// The audio player used to play music previews.
   final player = AudioPlayer();
 
-  RxBool isPlaying = false.obs;
+  // RxBool isPlaying = false.obs;
   bool isPaused = false;
+
+  final isPlayingPreviewMap = <String, RxBool>{}.obs;
+  final isLoadingPreviewMap = <String, RxBool>{}.obs;
+  final isLoadingPreviewSuccussMap = <String, RxBool>{}.obs;
 
   @override
   void onClose() {
@@ -107,31 +114,49 @@ class SearchMusicController extends GetxController {
   /// Handles potential errors during playback and updates the [errorMessage]
   /// observable if an error occurs.
   Future<void> playPreview(SearchResult result) async {
+    var id = result.trackId;
     var newPreviewUrl = result.previewUrl;
+    isLoadingPreviewMap.putIfAbsent(id, () => false.obs);
+    isLoadingPreviewMap[id]!.value = true;
+    isLoadingPreviewMap.refresh();
     try {
       if (!isPaused || previewingResult.value.previewUrl != newPreviewUrl) {
         await player.setUrl(newPreviewUrl);
       } 
       player.play();
-      isPlaying.value = true;
+
+      isPlayingPreviewMap.putIfAbsent(id, () => false.obs);
+      isPlayingPreviewMap[id]!.value = true;
+      isPlayingPreviewMap.refresh();
+
       isPaused = false;
       previewingResult.value = result;
 
     } catch (e) {
       print('Error playing preview: $e');
       errorMessage.value = 'Failed to play preview';
+      
+    } finally {
+      isPlayingPreviewMap[id]!.value = false;
+      isPlayingPreviewMap.refresh();
+
+      isLoadingPreviewSuccussMap.putIfAbsent(id, () => false.obs);
+      isLoadingPreviewSuccussMap[id]!.value = true;
+      isLoadingPreviewSuccussMap.refresh();
     }
   }
 
   /// Stops the music preview.
   void stopPreview() {
     player.stop();
-    isPlaying.value = false;
+    isPlayingPreviewMap[previewingResult.value.trackId]!.value = false;
   }
 
-  void pausePreview() {
+  void pausePreview(SearchResult result) {
     player.pause();
     isPaused = true;
-    isPlaying.value = false;
+    isPlayingPreviewMap.putIfAbsent(result.trackId, () => false.obs);
+    isPlayingPreviewMap[result.trackId]!.value = false;
+    isPlayingPreviewMap.refresh();
   }
 }
