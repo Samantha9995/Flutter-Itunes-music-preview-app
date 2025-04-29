@@ -9,8 +9,9 @@ import 'package:just_audio/just_audio.dart';
 
 class MusicPlayer extends StatefulWidget {
   final SearchResult result;
+  final bool isPlaying;
 
-  MusicPlayer({super.key, required this.result});
+  MusicPlayer({super.key, required this.result, required this.isPlaying});
 
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
@@ -33,14 +34,9 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   @override
   Widget build(BuildContext context) {
-     final ThemeData theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
 
-    final isPlaying = controller.isPlayingPreviewMap[widget.result.trackId]?.value ?? false;
-    print('---MusicPlayer---');
-    print('isPlaying: ' + isPlaying.toString());
-    print('trackId: ' + widget.result.trackId);
-    print('trackName: ' + widget.result.trackName);
-    print('---MusicPlayer---End---');
+    final isPlaying = controller.isPlayingPreviewMap.value == widget.result.trackId? true : false;
   
     return Container(
       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),

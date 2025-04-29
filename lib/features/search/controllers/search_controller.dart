@@ -59,7 +59,7 @@ class SearchMusicController extends GetxController {
   // RxBool isPlaying = false.obs;
   bool isPaused = false;
 
-  final isPlayingPreviewMap = <String, RxBool>{}.obs;
+  final isPlayingPreviewMap = Rxn<String>();
   final isLoadingPreviewMap = <String, RxBool>{}.obs;
   final isLoadingPreviewSuccussMap = <String, RxBool>{}.obs;
 
@@ -84,7 +84,6 @@ class SearchMusicController extends GetxController {
 
       /// Saves the search term to Hive after a successful search.
       if (results.isNotEmpty) {
-        print("Add search term to Hive: $searchTerm");
         await hiveService.addSearchTerm(searchTerm);
       }
     } catch (e) {
@@ -113,20 +112,29 @@ class SearchMusicController extends GetxController {
   ///
   /// Handles potential errors during playback and updates the [errorMessage]
   /// observable if an error occurs.
-  Future<void> playPreview(SearchResult result) async {
+  Future<void> playPreview(SearchResult result, {bool isReplayPreview = false}) async {
     var id = result.trackId;
     var newPreviewUrl = result.previewUrl;
+
     isLoadingPreviewMap.putIfAbsent(id, () => false.obs);
     isLoadingPreviewMap[id]!.value = true;
     isLoadingPreviewMap.refresh();
+
     try {
-      if (!isPaused || previewingResult.value.previewUrl != newPreviewUrl) {
+      //User click replay button
+      if (isReplayPreview) {
+        if (!isPaused) {
+          pausePreview(result);
+        }
+        await player.setUrl(newPreviewUrl);
+      //Still playing preview and user click another new preview
+      } else if (!isPaused || previewingResult.value.previewUrl != newPreviewUrl) {
+        //set new preview url
         await player.setUrl(newPreviewUrl);
       } 
       player.play();
 
-      isPlayingPreviewMap.putIfAbsent(id, () => false.obs);
-      isPlayingPreviewMap[id]!.value = true;
+      isPlayingPreviewMap.value = id;
       isPlayingPreviewMap.refresh();
 
       isPaused = false;
@@ -137,9 +145,6 @@ class SearchMusicController extends GetxController {
       errorMessage.value = 'Failed to play preview';
       
     } finally {
-      isPlayingPreviewMap[id]!.value = false;
-      isPlayingPreviewMap.refresh();
-
       isLoadingPreviewSuccussMap.putIfAbsent(id, () => false.obs);
       isLoadingPreviewSuccussMap[id]!.value = true;
       isLoadingPreviewSuccussMap.refresh();
@@ -149,14 +154,14 @@ class SearchMusicController extends GetxController {
   /// Stops the music preview.
   void stopPreview() {
     player.stop();
-    isPlayingPreviewMap[previewingResult.value.trackId]!.value = false;
+    isPlayingPreviewMap.value = null;
+    isPlayingPreviewMap.refresh();
   }
 
   void pausePreview(SearchResult result) {
     player.pause();
     isPaused = true;
-    isPlayingPreviewMap.putIfAbsent(result.trackId, () => false.obs);
-    isPlayingPreviewMap[result.trackId]!.value = false;
+    isPlayingPreviewMap.value = null;
     isPlayingPreviewMap.refresh();
   }
 }

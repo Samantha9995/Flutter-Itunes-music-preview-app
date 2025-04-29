@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
@@ -18,17 +19,9 @@ class SearchResultTile extends StatelessWidget {
       title: Text(result.trackName),
       subtitle: Text(result.artistName),
       trailing: Obx(() { 
-        final isPlaying = controller.isPlayingPreviewMap[result.trackId]?.value ?? false;
+        final isPlaying = controller.isPlayingPreviewMap.value == result.trackId? true : false;
         final isLoadingPreview = controller.isLoadingPreviewMap[result.trackId]?.value ?? false;
         final isLoadingPreviewSuccuss = controller.isLoadingPreviewSuccussMap[result.trackId]?.value ?? false;
-
-        print('---SearchResultTile---');
-        print('trackId: ' + result.trackId);
-        print('trackName: ' + result.trackName);
-        print('isPlaying: ' + isPlaying.toString());
-        print('isloadingPreview: ' + isLoadingPreview.toString());
-        print('isLoadingPreviewSuccess: ' + isLoadingPreviewSuccuss.toString());
-        print('---SearchResultTile---End---');
 
         Widget iconWidget;
 
@@ -37,11 +30,7 @@ class SearchResultTile extends StatelessWidget {
           iconWidget = IconButton(
             icon: const Icon(Icons.replay, color: Colors.green),
             onPressed: () {
-              if (isPlaying) {
-                controller.pausePreview(result);
-              } else {
-                controller.playPreview(result);
-              }
+                controller.playPreview(result, isReplayPreview: true);
             },
           );
         } else if (isLoadingPreview) {

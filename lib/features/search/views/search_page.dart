@@ -96,9 +96,11 @@ class SearchPage extends StatelessWidget {
                   if (controller.previewingResult.value.previewUrl.isEmpty) {
                     return Container();
                   } else {
+                    print('Search page' + ' update MusicPlayer');
                     return MusicPlayer(
-                      result: controller.previewingResult.value
-                      );
+                      result: controller.previewingResult.value,
+                      isPlaying: controller.isPlayingPreviewMap.value == controller.previewingResult.value.trackId,
+                    );
                   }
                 })
               ],
