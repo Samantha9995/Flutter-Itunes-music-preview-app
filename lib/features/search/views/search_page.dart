@@ -93,16 +93,22 @@ class SearchPage extends StatelessWidget {
                   }),
                 ),
                 Obx(() {
-                  if (controller.previewingResult.value.previewUrl.isEmpty) {
-                    return Container();
-                  } else {
-                    print('Search page' + ' update MusicPlayer');
-                    return MusicPlayer(
-                      result: controller.previewingResult.value,
-                      isPlaying: controller.isPlayingPreviewMap.value == controller.previewingResult.value.trackId,
-                    );
-                  }
-                })
+                  final hasPreview = controller.previewingResult.value.previewUrl.isNotEmpty;
+                  return ClipRect( 
+                    child: Align( 
+                      alignment: Alignment.topCenter, 
+                      heightFactor: hasPreview ? 1.0 : 0.0,
+                      child: AnimatedOpacity(
+                        opacity: hasPreview ? 1.0 : 0.0,
+                        duration: const Duration(milliseconds: 500),
+                        child: MusicPlayer(
+                          result: controller.previewingResult.value,
+                          isPlaying: controller.isPlayingPreviewMap.value == controller.previewingResult.value.trackId,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ],
             ),
            )

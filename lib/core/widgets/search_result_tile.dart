@@ -26,7 +26,6 @@ class SearchResultTile extends StatelessWidget {
         Widget iconWidget;
 
         if (isLoadingPreviewSuccuss) {
-          // 顯示剔號 icon
           iconWidget = IconButton(
             icon: const Icon(Icons.replay, color: Colors.green),
             onPressed: () {
@@ -34,9 +33,8 @@ class SearchResultTile extends StatelessWidget {
             },
           );
         } else if (isLoadingPreview) {
-          // 顯示 loading 狀態
-          iconWidget = const Padding(
-            padding: EdgeInsets.only(right: 10.0), // 加入右邊 padding
+          iconWidget = Padding(
+            padding: const EdgeInsets.only(right: 10.0),
             child: SizedBox(
               width: 24,
               height: 24,
@@ -44,13 +42,12 @@ class SearchResultTile extends StatelessWidget {
                 child: SizedBox(
                   width: 16,
                   height: 16,
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(color: Colors.grey[800]) ,
                 ),
               ),
             ),
           );
         } else {
-          // 顯示播放/暫停按鈕
           iconWidget = IconButton(
             icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
             onPressed: () {
