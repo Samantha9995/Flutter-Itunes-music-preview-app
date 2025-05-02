@@ -19,7 +19,7 @@ class SearchResultTile extends StatelessWidget {
       title: Text(result.trackName),
       subtitle: Text(result.artistName),
       trailing: Obx(() { 
-        final isPlaying = controller.isPlayingPreviewMap.value == result.trackId? true : false;
+        final isPlaying = controller.isPlayingPreviewMap.value == result.trackId;
         final isLoadingPreview = controller.isLoadingPreviewMap[result.trackId]?.value ?? false;
         final isLoadingPreviewSuccuss = controller.isLoadingPreviewSuccussMap[result.trackId]?.value ?? false;
 
