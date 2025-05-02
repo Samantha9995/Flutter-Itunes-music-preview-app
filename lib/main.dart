@@ -30,14 +30,23 @@ void main() async {
   setupService();
 
   // Initialize EasyLocalization for internationalization.
-  await EasyLocalization.ensureInitialized();
+  try {
+    await EasyLocalization.ensureInitialized();
+  } catch (e) {
+    print('Error initializing EasyLocalization: $e');
+  }
 
-  // Initialize Hive for local data storage.
-  await Hive.initFlutter();
+  try {
+    // Initialize the Hive database for local data storage.
+    // Register the adapter for the SearchHistoryModel class.
+    // This is required for Hive to store and retrieve objects of this type.
+    await Hive.initFlutter();
+    Hive.registerAdapter(SearchHistoryModelAdapter());
+  } catch (e) {
+    print('Error initializing Hive: $e');
+  }
 
-  // Register the adapter for the SearchHistoryModel class.
-  // This is required for Hive to store and retrieve objects of this type.
-  Hive.registerAdapter(SearchHistoryModelAdapter());
+
 
   // Run the app with EasyLocalization for localization support.
   runApp(
