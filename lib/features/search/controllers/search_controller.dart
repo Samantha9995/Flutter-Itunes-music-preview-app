@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/di/service_locator.dart';
 import 'package:itunes_music_app/core/models/search_history.dart';
 import 'package:itunes_music_app/core/services/hive_service.dart';
 import 'package:itunes_music_app/features/search/repositories/search_repository.dart';

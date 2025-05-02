@@ -22,7 +22,6 @@ import 'package:itunes_music_app/core/models/search_history.dart';
 // limitations under the License.
 
 void main() async {
-
   // Ensure that Flutter is initialized before running the app.
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -46,17 +45,18 @@ void main() async {
     print('Error initializing Hive: $e');
   }
 
-
-
   // Run the app with EasyLocalization for localization support.
   runApp(
     EasyLocalization(
       supportedLocales: const [
         Locale('en', 'US'), // English (United States)
-        Locale('zh', 'TW')  // Chinese (Taiwan)
+        Locale('zh', 'TW'), // Chinese (Taiwan)
       ],
       path: 'langs', // Path to the localization files
-      fallbackLocale: const Locale('en', 'US'), // Default locale if no translation is available
+      fallbackLocale: const Locale(
+        'en',
+        'US',
+      ), // Default locale if no translation is available
       child: const MyApp(), // The root widget of the application
     ),
   );

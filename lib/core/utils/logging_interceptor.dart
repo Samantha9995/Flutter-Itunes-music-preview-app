@@ -8,10 +8,8 @@ class LoggingInterceptor extends Interceptor {
     print('--> ${options.method} ${options.uri}'); // Print request info
     print('Headers:');
     options.headers.forEach((k, v) => print('$k: $v'));
-    if (options.queryParameters != null) {
-      print('queryParameters: ${options.queryParameters}');
-    }
-    if (options.data != null) {
+    print('queryParameters: ${options.queryParameters}');
+      if (options.data != null) {
       print('Body: ${options.data}');
     }
     print('--> END ${options.method}');

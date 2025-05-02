@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/di/service_locator.dart';
 import 'package:itunes_music_app/core/models/search_result.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
-import 'package:just_audio/just_audio.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.
 
@@ -11,13 +9,13 @@ class MusicPlayer extends StatefulWidget {
   final SearchResult result;
   final bool isPlaying;
 
-  MusicPlayer({super.key, required this.result, required this.isPlaying});
+  const MusicPlayer({super.key, required this.result, required this.isPlaying});
 
   @override
-  _MusicPlayerState createState() => _MusicPlayerState();
+  MusicPlayerState createState() => MusicPlayerState();
 }
 
-class _MusicPlayerState extends State<MusicPlayer> {
+class MusicPlayerState extends State<MusicPlayer> {
   final SearchMusicController controller = Get.find<SearchMusicController>();
 
 

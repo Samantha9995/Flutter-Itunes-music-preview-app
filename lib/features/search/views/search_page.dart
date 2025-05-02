@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/di/service_locator.dart';
 import 'package:itunes_music_app/core/widgets/about_me.dart';
 import 'dart:async';
 import 'package:itunes_music_app/core/widgets/custom_text.dart';
@@ -38,6 +37,7 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
   }
 
+  @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
