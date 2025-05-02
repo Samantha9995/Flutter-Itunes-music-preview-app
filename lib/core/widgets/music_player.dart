@@ -81,7 +81,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
             ),
           ),
           SizedBox(
-            width: 24.0, 
+            width: 28.0, 
             height: 24.0,
             child: IconButton(
               icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
