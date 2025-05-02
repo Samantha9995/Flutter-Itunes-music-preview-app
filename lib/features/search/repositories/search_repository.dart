@@ -12,8 +12,6 @@ import 'package:itunes_music_app/core/models/search_result.dart';
 class SearchRepository {
     /// The Dio client for making HTTP requests.
   final Dio dio;
-    /// The base URL for the iTunes API.
-  final String baseUrl = 'https://itunes.apple.com';
 
   /// Constructor that requires a [Dio] client.
   SearchRepository({required this.dio});
@@ -26,7 +24,7 @@ class SearchRepository {
   Future<List<SearchResult>> searchMusic(String searchTerm) async {
     try {
       final response = await dio.get(
-        '$baseUrl/search',
+        '/search',
         queryParameters: {
           'term': searchTerm,
           'entity': 'musicTrack',

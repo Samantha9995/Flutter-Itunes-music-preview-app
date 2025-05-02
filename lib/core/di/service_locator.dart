@@ -20,7 +20,11 @@ void setupService() {
 }
 
 void setUpDio() {
-  final dio = Dio();
+  final dio = Dio(BaseOptions(
+    baseUrl: 'https://itunes.apple.com',
+    connectTimeout: const Duration(seconds: 10),
+    receiveTimeout: const Duration(seconds: 10),
+  ));
   // dio.interceptors.add(LoggingInterceptor());
   Get.put<Dio>(dio);
 }
