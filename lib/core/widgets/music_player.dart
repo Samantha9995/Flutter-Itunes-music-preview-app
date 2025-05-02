@@ -99,22 +99,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
               },
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(right: 8.0),
-          //   child: IconButton(
-          //     icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-          //     color: Colors.grey[800],
-          //     onPressed: () {
-          //       setState(() {
-          //         if (isPlaying) {
-          //           controller.pausePreview(widget.result);
-          //         } else {
-          //           controller.playPreview(widget.result);
-          //         }
-          //       });
-          //     },
-          //   ),
-          // ),
         ],
       ),
     );
