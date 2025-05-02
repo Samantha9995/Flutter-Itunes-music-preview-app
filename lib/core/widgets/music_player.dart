@@ -18,7 +18,7 @@ class MusicPlayer extends StatefulWidget {
 }
 
 class _MusicPlayerState extends State<MusicPlayer> {
-  final SearchMusicController controller = locator<SearchMusicController>();
+  final SearchMusicController controller = Get.find<SearchMusicController>();
 
 
   @override

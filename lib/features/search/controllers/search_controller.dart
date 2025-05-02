@@ -21,7 +21,7 @@ class SearchMusicController extends GetxController {
   final SearchRepository searchRepository;
 
   /// Provides access to the Hive database for managing search history.
-  final HiveService hiveService = locator<HiveService>();
+  final HiveService hiveService = Get.find<HiveService>();
 
   /// A list of [SearchResult] objects that match the search term.
   ///

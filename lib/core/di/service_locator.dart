@@ -1,5 +1,5 @@
-import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:itunes_music_app/features/search/repositories/search_repository.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
 
@@ -7,26 +7,20 @@ import 'package:itunes_music_app/core/services/hive_service.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.
 
-final GetIt locator = GetIt.instance;
-
-void setupServiceLocator() {
+void setupService() {
   setUpDio();
 
   // Register HiveService
-  locator.registerLazySingleton<HiveService>(() => HiveService());
+  Get.lazyPut<HiveService>(() => HiveService());
 
-  locator.registerSingleton<SearchRepository>(
-    SearchRepository(dio: locator<Dio>()),
-  );
+  Get.put<SearchRepository>(SearchRepository(dio: Get.find<Dio>()));
 
-  locator.registerSingleton<SearchMusicController>(
-    SearchMusicController(searchRepository: locator<SearchRepository>()),
-  );
+  Get.put<SearchMusicController>(SearchMusicController(searchRepository: Get.find<SearchRepository>()));
 
 }
 
 void setUpDio() {
   final dio = Dio();
   // dio.interceptors.add(LoggingInterceptor());
-  locator.registerSingleton<Dio>(dio);
+  Get.put<Dio>(dio);
 }

@@ -27,7 +27,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
-  final SearchMusicController controller = locator<SearchMusicController>();
+  final SearchMusicController controller = Get.find<SearchMusicController>();
   final _searchText = ValueNotifier<String>('');
   final _debounce = Debounce(delay: const Duration(milliseconds: 500));
   final FocusNode _focusNode = FocusNode();

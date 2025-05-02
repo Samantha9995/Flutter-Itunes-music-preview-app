@@ -27,7 +27,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Set up the service locator for dependency injection.
-  setupServiceLocator();
+  setupService();
 
   // Initialize EasyLocalization for internationalization.
   await EasyLocalization.ensureInitialized();
@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
       theme: iTunesTheme(),
 
       // Set the home page of the application to the SearchPage.
-      home: SearchPage(),
+      home: const SearchPage(),
     );
   }
 }
