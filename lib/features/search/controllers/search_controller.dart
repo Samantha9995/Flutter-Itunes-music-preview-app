@@ -56,7 +56,7 @@ class SearchMusicController extends GetxController {
   final player = AudioPlayer();
 
   // RxBool isPlaying = false.obs;
-  bool isPaused = false;
+  final isPaused = false.obs;
 
   final isPlayingPreviewMap = Rxn<String>();
   final isLoadingPreviewMap = <String, RxBool>{}.obs;
@@ -122,12 +122,12 @@ class SearchMusicController extends GetxController {
     try {
       //User click replay button
       if (isReplayPreview) {
-        if (!isPaused) {
+        if (!isPaused.value) {
           pausePreview();
         }
         await player.setUrl(newPreviewUrl);
       //Still playing preview and user click another new preview
-      } else if (!isPaused || previewingResult.value.previewUrl != newPreviewUrl) {
+      } else if (!isPaused.value || previewingResult.value.previewUrl != newPreviewUrl) {
         //set new preview url
         await player.setUrl(newPreviewUrl);
       } 
@@ -142,12 +142,11 @@ class SearchMusicController extends GetxController {
       isPlayingPreviewMap.value = id;
       isPlayingPreviewMap.refresh();
 
-      isPaused = false;
+      isPaused.value = false;
       previewingResult.value = result;
 
     } catch (e) {
-      print('Error playing preview: $e');
-      errorMessage.value = 'Failed to play preview';
+      errorMessage.value = 'Failed to play preview: $e';
       
     } finally {
       isLoadingPreviewSuccussMap.putIfAbsent(id, () => false.obs);
@@ -159,14 +158,18 @@ class SearchMusicController extends GetxController {
   /// Stops the music preview.
   void stopPreview() {
     player.stop();
-    isPlayingPreviewMap.value = null;
-    isPlayingPreviewMap.refresh();
+    _resetPlayingState();
   }
 
+  // Pauses the music preview.
   void pausePreview() {
     player.pause();
-    isPaused = true;
+    isPaused.value = true;
+    _resetPlayingState();
+  }
+
+  void _resetPlayingState() {
     isPlayingPreviewMap.value = null;
-    isPlayingPreviewMap.refresh();
+    isLoadingPreviewMap.refresh();
   }
 }
