@@ -82,7 +82,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
           ),
           SizedBox(
             width: 28.0, 
-            height: 24.0,
+            height: 48.0,
             child: IconButton(
               icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
               color: Colors.grey[800],
@@ -91,7 +91,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
               onPressed: () {
                 setState(() {
                   if (isPlaying) {
-                    controller.pausePreview(widget.result);
+                    controller.pausePreview();
                   } else {
                     controller.playPreview(widget.result);
                   }

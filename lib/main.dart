@@ -22,11 +22,12 @@ import 'package:itunes_music_app/core/models/search_history.dart';
 // limitations under the License.
 
 void main() async {
-  // Set up the service locator for dependency injection.
-  setupServiceLocator();
 
   // Ensure that Flutter is initialized before running the app.
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Set up the service locator for dependency injection.
+  setupServiceLocator();
 
   // Initialize EasyLocalization for internationalization.
   await EasyLocalization.ensureInitialized();

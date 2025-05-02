@@ -124,7 +124,7 @@ class SearchMusicController extends GetxController {
       //User click replay button
       if (isReplayPreview) {
         if (!isPaused) {
-          pausePreview(result);
+          pausePreview();
         }
         await player.setUrl(newPreviewUrl);
       //Still playing preview and user click another new preview
@@ -164,7 +164,7 @@ class SearchMusicController extends GetxController {
     isPlayingPreviewMap.refresh();
   }
 
-  void pausePreview(SearchResult result) {
+  void pausePreview() {
     player.pause();
     isPaused = true;
     isPlayingPreviewMap.value = null;

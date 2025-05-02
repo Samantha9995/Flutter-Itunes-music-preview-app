@@ -27,7 +27,7 @@ class HiveService {
     // Sort by timestamp in descending order (newest first)
     allHistory.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
-    return allHistory.take(5).toList();// Limit to the last 10 entries
+    return allHistory.take(3).toList();// Limit to the last 10 entries
   }
 
   Future<List<SearchHistoryModel>> findSearchHistory(String searchTerm) async {
@@ -42,7 +42,7 @@ class HiveService {
 
     matchingHistory.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
-    return matchingHistory.take(5).toList();
+    return matchingHistory.take(3).toList();
   }
 
   Future<void> clearSearchHistory() async {

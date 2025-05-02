@@ -65,7 +65,7 @@ class SearchResultTile extends StatelessWidget {
               constraints: const BoxConstraints(),
               onPressed: () {
                 if (isPlaying) {
-                  controller.pausePreview(result);
+                  controller.pausePreview();
                 } else {
                   controller.playPreview(result);
                 }

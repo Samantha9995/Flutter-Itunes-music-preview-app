@@ -19,13 +19,46 @@ import 'package:itunes_music_app/features/search/controllers/search_controller.d
 ///
 /// Uses `SearchMusicController` to manage search logic and state.
 
-class SearchPage extends StatelessWidget {
-  SearchPage({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
   final SearchMusicController controller = locator<SearchMusicController>();
   final _searchText = ValueNotifier<String>('');
   final _debounce = Debounce(delay: const Duration(milliseconds: 500));
   final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.paused:
+        controller.pausePreview();
+        break;
+      case AppLifecycleState.detached:
+        break;
+      case AppLifecycleState.hidden:
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,86 +66,88 @@ class SearchPage extends StatelessWidget {
         valueListenable: _searchText,
         builder: (context, text, child) {
           return GestureDetector(
-            onTap: () {
-              _focusNode.unfocus();
-            },
-            child: Scaffold(
-            appBar: AppBar(
-              title: const Text('itunes_music_search').tr(),
-              actions: [
-                PopupMenuButton<String>(
-                  onSelected: (value) {
-                    if (value == 'about') {
-                      Get.to(() => const AboutMePage());
-                    }
-                  },
-                  itemBuilder: (BuildContext context) => [
-                    PopupMenuItem<String>(
-                      value: 'about',
-                      child: const Text('about_the_developer').tr(),
+              onTap: () {
+                _focusNode.unfocus();
+              },
+              child: Scaffold(
+                appBar: AppBar(
+                  title: const Text('itunes_music_search').tr(),
+                  actions: [
+                    PopupMenuButton<String>(
+                      onSelected: (value) {
+                        if (value == 'about') {
+                          Get.to(() => const AboutMePage());
+                        }
+                      },
+                      itemBuilder: (BuildContext context) => [
+                        PopupMenuItem<String>(
+                          value: 'about',
+                          child: const Text('about_the_developer').tr(),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-            body: Column(
-              children: [
-                SearchMusicBar(
-                  controller: controller,
-                  onSearchTextChanged: (text) {
-                    _searchText.value = text;
-                    _debounce.run(() {
-                      controller.performSearch(text);
-                    });
-                  },
-                  focusNode: _focusNode,
-                ),
-                Expanded(
-                  child: Obx(() {
-                    if (controller.isLoading.value) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (controller.errorMessage.value.isNotEmpty) {
-                      return Center(
-                          child: CustomText(
-                              'Error: ${controller.errorMessage.value}'));
-                    } else if (controller.searchResults.isEmpty) {
-                      return const Center(child: CustomText('no_result'));
-                    } else {
-                      return ListView.builder(
-                          itemCount: controller.searchResults.length,
-                          itemBuilder: (context, index) {
-                            final result = controller.searchResults[index];
-                            return SearchResultTile(
-                              key: ValueKey(result.trackId.toString()),
-                              result: result,
-                              controller: controller,
-                            );
-                          },
-                        );
-                    }
-                  }),
-                ),
-                Obx(() {
-                  final hasPreview = controller.previewingResult.value.previewUrl.isNotEmpty;
-                  return ClipRect( 
-                    child: Align( 
-                      alignment: Alignment.topCenter, 
-                      heightFactor: hasPreview ? 1.0 : 0.0,
-                      child: AnimatedOpacity(
-                        opacity: hasPreview ? 1.0 : 0.0,
-                        duration: const Duration(milliseconds: 500),
-                        child: MusicPlayer(
-                          result: controller.previewingResult.value,
-                          isPlaying: controller.isPlayingPreviewMap.value == controller.previewingResult.value.trackId,
-                        ),
-                      ),
+                body: Column(
+                  children: [
+                    SearchMusicBar(
+                      controller: controller,
+                      onSearchTextChanged: (text) {
+                        _searchText.value = text;
+                        _debounce.run(() {
+                          controller.performSearch(text);
+                        });
+                      },
+                      focusNode: _focusNode,
                     ),
-                  );
-                }),
-              ],
-            ),
-           )
-          );
+                    Expanded(
+                      child: Obx(() {
+                        if (controller.isLoading.value) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (controller.errorMessage.value.isNotEmpty) {
+                          return Center(
+                              child: CustomText(
+                                  'Error: ${controller.errorMessage.value}'));
+                        } else if (controller.searchResults.isEmpty) {
+                          return const Center(child: CustomText('no_result'));
+                        } else {
+                          return ListView.builder(
+                            itemCount: controller.searchResults.length,
+                            itemBuilder: (context, index) {
+                              final result = controller.searchResults[index];
+                              return SearchResultTile(
+                                key: ValueKey(result.trackId.toString()),
+                                result: result,
+                                controller: controller,
+                              );
+                            },
+                          );
+                        }
+                      }),
+                    ),
+                    Obx(() {
+                      final hasPreview = controller
+                          .previewingResult.value.previewUrl.isNotEmpty;
+                      return ClipRect(
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          heightFactor: hasPreview ? 1.0 : 0.0,
+                          child: AnimatedOpacity(
+                            opacity: hasPreview ? 1.0 : 0.0,
+                            duration: const Duration(milliseconds: 500),
+                            child: MusicPlayer(
+                              result: controller.previewingResult.value,
+                              isPlaying: controller.isPlayingPreviewMap.value ==
+                                  controller.previewingResult.value.trackId,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              ));
         });
   }
 }
