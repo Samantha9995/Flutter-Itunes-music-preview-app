@@ -134,6 +134,12 @@ class SearchMusicController extends GetxController {
       } 
       player.play();
 
+      player.playerStateStream.listen((state) {
+        if (state.processingState == ProcessingState.completed) {
+          stopPreview();
+        }
+      });
+
       isPlayingPreviewMap.value = id;
       isPlayingPreviewMap.refresh();
 
