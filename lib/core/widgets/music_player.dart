@@ -80,11 +80,14 @@ class _MusicPlayerState extends State<MusicPlayer> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+          SizedBox(
+            width: 24.0, 
+            height: 24.0,
             child: IconButton(
               icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
               color: Colors.grey[800],
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
               onPressed: () {
                 setState(() {
                   if (isPlaying) {
@@ -96,6 +99,22 @@ class _MusicPlayerState extends State<MusicPlayer> {
               },
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 8.0),
+          //   child: IconButton(
+          //     icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+          //     color: Colors.grey[800],
+          //     onPressed: () {
+          //       setState(() {
+          //         if (isPlaying) {
+          //           controller.pausePreview(widget.result);
+          //         } else {
+          //           controller.playPreview(widget.result);
+          //         }
+          //       });
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );
