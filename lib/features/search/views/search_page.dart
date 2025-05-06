@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/di/service_locator.dart';
 import 'package:itunes_music_app/core/widgets/about_me.dart';
 import 'dart:async';
 import 'package:itunes_music_app/core/widgets/custom_text.dart';
@@ -64,6 +63,7 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
       case AppLifecycleState.detached:
         break;
       case AppLifecycleState.hidden:
+        controller.pausePreview();
         break;
     }
   }
@@ -109,29 +109,7 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
                     focusNode: _focusNode,
                   ),
                   Expanded(
-                    child: Obx(() {
-                      if (controller.isLoading.value) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (controller.errorMessage.value.isNotEmpty) {
-                        return Center(
-                            child: CustomText(
-                                'Error: ${controller.errorMessage.value}'));
-                      } else if (controller.searchResults.isEmpty) {
-                        return const Center(child: CustomText('no_result'));
-                      } else {
-                        return ListView.builder(
-                          itemCount: controller.searchResults.length,
-                          itemBuilder: (context, index) {
-                            final result = controller.searchResults[index];
-                            return SearchResultTile(
-                              key: ValueKey(result.trackId.toString()),
-                              result: result,
-                              controller: controller,
-                            );
-                          },
-                        );
-                      }
-                    }),
+                    child: _SearchResultList(controller: controller),
                   ),
                   Obx(() {
                     final hasPreview =
@@ -157,6 +135,50 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
             ),
           );
         });
+  }
+}
+
+class _SearchResultList extends StatelessWidget {
+  const _SearchResultList({required this.controller});
+
+  final SearchMusicController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (controller.errorMessage.value.isNotEmpty) {
+        return Center(
+          child: CustomText('Error: ${controller.errorMessage.value}'),
+        );
+      } else if (controller.searchResults.isEmpty) {
+        return const Center(child: CustomText('no_result'));
+      } else {
+        return _SearchResultListView(controller: controller);
+      }
+    });
+  }
+}
+
+class _SearchResultListView extends StatelessWidget {
+  const _SearchResultListView({required this.controller});
+
+  final SearchMusicController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: controller.searchResults.length,
+      itemBuilder: (context, index) {
+        final result = controller.searchResults[index];
+        return SearchResultTile(
+          key: ValueKey(result.trackId.toString()),
+          result: result,
+          controller: controller,
+        );
+      },
+    );
   }
 }
 
