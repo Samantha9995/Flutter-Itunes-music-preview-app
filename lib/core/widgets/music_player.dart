@@ -26,15 +26,12 @@ class MusicPlayerState extends State<MusicPlayer> {
 
   @override
   void dispose() {
-    controller.onClose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-
-    final isPlaying = controller.isPlayingPreviewMap.value == widget.result.trackId? true : false;
   
     return Container(
       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
@@ -81,21 +78,22 @@ class MusicPlayerState extends State<MusicPlayer> {
           SizedBox(
             width: 28.0, 
             height: 48.0,
-            child: IconButton(
-              icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-              color: Colors.grey[800],
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              onPressed: () {
-                setState(() {
+            child: Obx(() {
+              final isPlaying = controller.isPlayingPreviewMap.value == widget.result.trackId;
+              return IconButton(
+                icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                color: Colors.grey[800],
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                onPressed: () {
                   if (isPlaying) {
                     controller.pausePreview();
                   } else {
                     controller.playPreview(widget.result);
                   }
-                });
-              },
-            ),
+                },
+              );
+            }),
           ),
         ],
       ),
