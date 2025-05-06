@@ -1,3 +1,5 @@
+import 'dart:math' as logger;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itunes_music_app/core/di/service_locator.dart';
@@ -6,6 +8,7 @@ import 'package:itunes_music_app/features/search/views/search_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:itunes_music_app/core/models/search_history.dart';
+import 'package:logger/logger.dart';
 
 // Copyright 2025 SADev. All rights reserved.
 //
@@ -28,11 +31,13 @@ void main() async {
   // Set up the service locator for dependency injection.
   setupService();
 
+  final logger = Get.find<Logger>();
+
   // Initialize EasyLocalization for internationalization.
   try {
     await EasyLocalization.ensureInitialized();
   } catch (e) {
-    print('Error initializing EasyLocalization: $e');
+    logger.e('Error initializing EasyLocalization: $e');
   }
 
   try {
@@ -42,7 +47,7 @@ void main() async {
     await Hive.initFlutter();
     Hive.registerAdapter(SearchHistoryModelAdapter());
   } catch (e) {
-    print('Error initializing Hive: $e');
+    logger.e('Error initializing Hive: $e');
   }
 
   // Run the app with EasyLocalization for localization support.

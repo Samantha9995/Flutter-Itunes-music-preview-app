@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.
@@ -9,6 +11,9 @@ class AboutMePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final logger = Get.find<Logger>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('about_the_developer').tr(),
@@ -45,7 +50,7 @@ class AboutMePage extends StatelessWidget {
                       await launchUrl(url); // Launch the URL
                     } else {
                       // Handle the error if the URL couldn't be launched
-                      print('Could not launch gitURL');
+                      logger.e('Could not launch gitURL');
                       // Optionally, show an error message to the user using a SnackBar or AlertDialog
                     }
                   }

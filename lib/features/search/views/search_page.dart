@@ -8,6 +8,7 @@ import 'package:itunes_music_app/core/widgets/music_player.dart';
 import 'package:itunes_music_app/core/widgets/search_result_tile.dart';
 import 'package:itunes_music_app/core/widgets/search_bar.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
+import 'package:logger/web.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.
 

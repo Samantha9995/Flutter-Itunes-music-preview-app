@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itunes_music_app/core/models/search_result.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
+import 'package:logger/logger.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.
 
@@ -17,7 +18,7 @@ class MusicPlayer extends StatefulWidget {
 
 class MusicPlayerState extends State<MusicPlayer> {
   final SearchMusicController controller = Get.find<SearchMusicController>();
-
+  final logger = Get.find<Logger>();
 
   @override
   void initState() {
@@ -51,8 +52,8 @@ class MusicPlayerState extends State<MusicPlayer> {
                 image: NetworkImage(widget.result.artworkUrl100),
                 fit: BoxFit.cover,
                 onError: (exception, stackTrace) {
-                    print('Error loading image: $exception');
-                    print( 'Loading image from URL: ${widget.result.previewUrl}');
+                    logger.e('Error loading image: $exception');
+                    logger.e( 'Loading image from URL: ${widget.result.previewUrl}');
                   },
               ),
             ),

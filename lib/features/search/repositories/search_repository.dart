@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:itunes_music_app/core/models/search_result.dart';
+import 'package:logger/logger.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.
 
@@ -12,6 +14,8 @@ import 'package:itunes_music_app/core/models/search_result.dart';
 class SearchRepository {
     /// The Dio client for making HTTP requests.
   final Dio dio;
+    // Logger instance for logging
+  final Logger logger = Get.find<Logger>();
 
   /// Constructor that requires a [Dio] client.
   SearchRepository({required this.dio});
@@ -40,7 +44,7 @@ class SearchRepository {
         throw Exception('Failed to load search results: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error during search: $e');
+      logger.e('Error during search: $e');
       throw Exception('Failed to connect to the server or invalid search term');
     }
   }
