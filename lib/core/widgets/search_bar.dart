@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 import 'package:itunes_music_app/core/utils/constants.dart';
 import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
+import 'package:logger/logger.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.
 
@@ -26,6 +28,7 @@ class _SearchMusicBarState extends State<SearchMusicBar> {
   final TextEditingController _searchBarTextFieldController = TextEditingController();
   /// Boolean to control the visibility of suggestions
   bool _showSuggestions = false;
+  final logging = Get.find<Logger>();
 
   @override
   void initState() {
@@ -70,8 +73,7 @@ class _SearchMusicBarState extends State<SearchMusicBar> {
             },
             style: Theme.of(context).textTheme.bodyMedium,
           ),
-          if (_showSuggestions)
-            Container(
+          Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(borderRadius),
@@ -83,13 +85,25 @@ class _SearchMusicBarState extends State<SearchMusicBar> {
                 itemCount: widget.controller.searchHistory.length,
                 itemBuilder: (context, index) {
                   String searchTerm = widget.controller.searchHistory[index].searchTerm;
-                  return ListTile(
-                    title: Text(searchTerm),
-                    onTap: () {
-                      _searchBarTextFieldController.text = searchTerm;
-                      widget.onSearchTextChanged(searchTerm);
-                      widget.focusNode.unfocus();
+                  return Visibility(
+                    visible: _showSuggestions,
+                    maintainState: true,
+                    child: Listener(
+                    onPointerDown: (event) {
+                      logging.e('Listener: Pointer Down');
                     },
+                    child: InkWell(
+                      onTap: () {
+                        logging.e('InkWell: onTap');
+                        _searchBarTextFieldController.text = searchTerm;
+                        widget.onSearchTextChanged(searchTerm);
+                        widget.focusNode.unfocus();
+                      },
+                    child: ListTile(
+                      title: Text(searchTerm)
+                     ),
+                    )
+                   )
                   );
                 },
               ),
