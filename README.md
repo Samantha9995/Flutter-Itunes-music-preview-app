@@ -2,7 +2,8 @@
 
 A Flutter application that allows users to search for music on the iTunes Store and play previews.
 
-![demo](https://github.com/user-attachments/assets/be85e09e-767b-46b0-ae92-62a2ded3a68d)
+![demo_2](https://github.com/user-attachments/assets/3b12c19f-ca2c-4a3f-b5cd-1079a01e37be)
+
 
 ## Features
 
