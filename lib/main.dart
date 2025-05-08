@@ -74,6 +74,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       // Provide localization delegates for internationalization.
       localizationsDelegates: context.localizationDelegates,
 
