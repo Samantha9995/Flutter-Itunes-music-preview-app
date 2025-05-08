@@ -1,7 +1,7 @@
 // filepath: lib/core/services/hive_service.dart
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:itunes_music_app/core/models/search_history.dart';
+import 'package:listen_first/core/models/search_history.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.
 

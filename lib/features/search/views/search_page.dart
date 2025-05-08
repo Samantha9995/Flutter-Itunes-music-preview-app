@@ -1,14 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/widgets/about_me.dart';
+import 'package:listen_first/core/widgets/about_me.dart';
 import 'dart:async';
-import 'package:itunes_music_app/core/widgets/custom_text.dart';
-import 'package:itunes_music_app/core/widgets/music_player.dart';
-import 'package:itunes_music_app/core/widgets/search_result_tile.dart';
-import 'package:itunes_music_app/core/widgets/search_bar.dart';
-import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
-import 'package:logger/web.dart';
+import 'package:listen_first/core/widgets/custom_text.dart';
+import 'package:listen_first/core/widgets/music_player.dart';
+import 'package:listen_first/core/widgets/search_result_tile.dart';
+import 'package:listen_first/core/widgets/search_bar.dart';
+import 'package:listen_first/features/search/controllers/search_controller.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.
 

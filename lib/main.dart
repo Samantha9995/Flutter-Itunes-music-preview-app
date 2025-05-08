@@ -1,13 +1,11 @@
-import 'dart:math' as logger;
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/di/service_locator.dart';
-import 'package:itunes_music_app/core/theme/itunes_theme.dart';
-import 'package:itunes_music_app/features/search/views/search_page.dart';
+import 'package:listen_first/core/di/service_locator.dart';
+import 'package:listen_first/core/theme/itunes_theme.dart';
+import 'package:listen_first/features/search/views/search_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:itunes_music_app/core/models/search_history.dart';
+import 'package:listen_first/core/models/search_history.dart';
 import 'package:logger/logger.dart';
 
 // Copyright 2025 SADev. All rights reserved.

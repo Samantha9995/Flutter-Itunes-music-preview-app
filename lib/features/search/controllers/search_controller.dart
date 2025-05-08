@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/models/search_history.dart';
-import 'package:itunes_music_app/core/services/hive_service.dart';
-import 'package:itunes_music_app/features/search/repositories/search_repository.dart';
-import 'package:itunes_music_app/core/models/search_result.dart';
+import 'package:listen_first/core/models/search_history.dart';
+import 'package:listen_first/core/services/hive_service.dart';
+import 'package:listen_first/features/search/repositories/search_repository.dart';
+import 'package:listen_first/core/models/search_result.dart';
 import 'package:just_audio/just_audio.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/models/search_result.dart';
-import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
+import 'package:listen_first/core/models/search_result.dart';
+import 'package:listen_first/features/search/controllers/search_controller.dart';
 import 'package:logger/logger.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.

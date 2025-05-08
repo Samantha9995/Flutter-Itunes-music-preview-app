@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/utils/constants.dart';
-import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
+import 'package:listen_first/core/utils/constants.dart';
+import 'package:listen_first/features/search/controllers/search_controller.dart';
 import 'package:logger/logger.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.

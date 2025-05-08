@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/utils/logging_interceptor.dart';
-import 'package:itunes_music_app/features/search/repositories/search_repository.dart';
-import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
+import 'package:listen_first/features/search/repositories/search_repository.dart';
+import 'package:listen_first/features/search/controllers/search_controller.dart';
 
-import 'package:itunes_music_app/core/services/hive_service.dart';
+import 'package:listen_first/core/services/hive_service.dart';
 import 'package:logger/logger.dart';
 
 // Copyright (c) 2025 SADev. All rights reserved.

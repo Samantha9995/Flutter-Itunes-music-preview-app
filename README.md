@@ -72,7 +72,7 @@ The app uses a service locator pattern for dependency injection. The `setupServi
 2.  Navigate to the project directory:
 
     ```bash
-    cd itunes_music_app
+    cd listen_first
     ```
 
 3.  Install dependencies:
@@ -92,7 +92,7 @@ The app uses a service locator pattern for dependency injection. The `setupServi
 
 ## Project Structure
 ```
-itunes_music_app/
+Listen_first/
 ├── lib/
 │ ├── core/
 │ │ └── di/

@@ -1,5 +1,5 @@
-name: itunes_music_app
-description: "A new Flutter project."
+name: listen_first
+description: "A Flutter application that allows users to search for music on the iTunes Store and play previews."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
