@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:get/get.dart' as getX;
+import 'package:get/get.dart' as get_x;
 import 'package:get/get_core/src/get_main.dart';
 import 'package:logger/web.dart';
 
