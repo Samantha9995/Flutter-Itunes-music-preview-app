@@ -9,7 +9,8 @@ class SearchResultTile extends StatelessWidget {
   final SearchResult result;
   final SearchMusicController controller;
 
-  const SearchResultTile({super.key, required this.result, required this.controller});
+  const SearchResultTile(
+      {super.key, required this.result, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -18,26 +19,28 @@ class SearchResultTile extends StatelessWidget {
       leading: Image.network(result.artworkUrl100),
       title: Text(result.trackName),
       subtitle: Text(result.artistName),
-      trailing: Obx(() { 
-        final isPlaying = controller.isPlayingPreviewMap.value == result.trackId;
-        final isLoadingPreview = controller.isLoadingPreviewMap[result.trackId]?.value ?? false;
-        final isLoadingPreviewSuccuss = controller.isLoadingPreviewSuccussMap[result.trackId]?.value ?? false;
+      trailing: Obx(() {
+        final isPlaying =
+            controller.isPlayingPreviewMap.value == result.trackId;
+        final isLoadingPreview =
+            controller.isLoadingPreviewMap[result.trackId]?.value ?? false;
+        final isLoadingPreviewSuccuss =
+            controller.isLoadingPreviewSuccussMap[result.trackId]?.value ??
+                false;
 
         Widget iconWidget;
 
         if (isLoadingPreviewSuccuss) {
           iconWidget = SizedBox(
-            width: 24,
-            height: 24,
-            child: IconButton(
-              icon: const Icon(Icons.replay, color: Colors.green),
-              constraints: const BoxConstraints(),
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                  controller.playPreview(result, isReplayPreview: true);
-              }
-            )
-          );
+              width: 24,
+              height: 24,
+              child: IconButton(
+                  icon: const Icon(Icons.replay, color: Colors.green),
+                  constraints: const BoxConstraints(),
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    controller.playPreview(result, isReplayPreview: true);
+                  }));
         } else if (isLoadingPreview) {
           iconWidget = Padding(
             padding: EdgeInsets.zero,
@@ -48,7 +51,7 @@ class SearchResultTile extends StatelessWidget {
                 child: SizedBox(
                   width: 16,
                   height: 16,
-                  child: CircularProgressIndicator(color: Colors.grey[800]) ,
+                  child: CircularProgressIndicator(color: Colors.grey[800]),
                 ),
               ),
             ),
@@ -58,18 +61,17 @@ class SearchResultTile extends StatelessWidget {
               width: 24,
               height: 24,
               child: IconButton(
-              icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              onPressed: () {
-                if (isPlaying) {
-                  controller.pausePreview();
-                } else {
-                  controller.playPreview(result);
-                }
-              },
-            )
-          );
+                icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                onPressed: () {
+                  if (isPlaying) {
+                    controller.pausePreview();
+                  } else {
+                    controller.playPreview(result);
+                  }
+                },
+              ));
         }
         return iconWidget;
       }),

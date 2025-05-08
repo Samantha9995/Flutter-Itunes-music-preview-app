@@ -11,7 +11,6 @@ class AboutMePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final logger = Get.find<Logger>();
 
     return Scaffold(
@@ -24,11 +23,14 @@ class AboutMePage extends StatelessWidget {
           children: [
             const CircleAvatar(
               radius: 50,
-              backgroundImage: NetworkImage('https://avatars.githubusercontent.com/u/47018729?s=400&u=ac0b960ea6d173bf2403ab5e9a465071665e6da4&v=4'),
+              backgroundImage: NetworkImage(
+                  'https://avatars.githubusercontent.com/u/47018729?s=400&u=ac0b960ea6d173bf2403ab5e9a465071665e6da4&v=4'),
             ),
             const SizedBox(height: 16),
-            const Text('SADev', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            const Text('Android & Flutter Developer', style: TextStyle(fontSize: 16)),
+            const Text('SADev',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            const Text('Android & Flutter Developer',
+                style: TextStyle(fontSize: 16)),
             const SizedBox(height: 16),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 32.0),
@@ -43,22 +45,26 @@ class AboutMePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  icon: Image.asset('assets/images/github_icon.png', width: 24, height: 24),
-                  onPressed: () async { // Mark the function as async
-                    final Uri url = Uri.parse('https://github.com/Samantha9995');
-                    if (await canLaunchUrl(url)) { // Check if the URL can be launched
-                      await launchUrl(url); // Launch the URL
-                    } else {
-                      // Handle the error if the URL couldn't be launched
-                      logger.e('Could not launch gitURL');
-                      // Optionally, show an error message to the user using a SnackBar or AlertDialog
-                    }
-                  }
-                ),
+                    icon: Image.asset('assets/images/github_icon.png',
+                        width: 24, height: 24),
+                    onPressed: () async {
+                      // Mark the function as async
+                      final Uri url =
+                          Uri.parse('https://github.com/Samantha9995');
+                      if (await canLaunchUrl(url)) {
+                        // Check if the URL can be launched
+                        await launchUrl(url); // Launch the URL
+                      } else {
+                        // Handle the error if the URL couldn't be launched
+                        logger.e('Could not launch gitURL');
+                        // Optionally, show an error message to the user using a SnackBar or AlertDialog
+                      }
+                    }),
               ],
             ),
             const SizedBox(height: 32),
-            const Text('Copyright © 2025 SADev', style: TextStyle(fontSize: 12)),
+            const Text('Copyright © 2025 SADev',
+                style: TextStyle(fontSize: 12)),
           ],
         ),
       ),

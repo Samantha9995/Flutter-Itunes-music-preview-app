@@ -9,8 +9,8 @@ import 'package:logger/logger.dart';
 
 class SearchMusicBar extends StatefulWidget {
   const SearchMusicBar({
-    super.key, 
-    required this.controller, 
+    super.key,
+    required this.controller,
     required this.onSearchTextChanged,
     required this.focusNode,
   });
@@ -24,8 +24,9 @@ class SearchMusicBar extends StatefulWidget {
 }
 
 class _SearchMusicBarState extends State<SearchMusicBar> {
-  
-  final TextEditingController _searchBarTextFieldController = TextEditingController();
+  final TextEditingController _searchBarTextFieldController =
+      TextEditingController();
+
   /// Boolean to control the visibility of suggestions
   bool _showSuggestions = false;
   final logging = Get.find<Logger>();
@@ -34,8 +35,8 @@ class _SearchMusicBarState extends State<SearchMusicBar> {
   void initState() {
     super.initState();
     widget.focusNode.addListener(() {
-        _showSuggestions = widget.focusNode.hasFocus;
-        setState(() {});
+      _showSuggestions = widget.focusNode.hasFocus;
+      setState(() {});
     });
 
     setState(() {
@@ -74,40 +75,36 @@ class _SearchMusicBarState extends State<SearchMusicBar> {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(borderRadius),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: widget.controller.searchHistory.length,
-                itemBuilder: (context, index) {
-                  String searchTerm = widget.controller.searchHistory[index].searchTerm;
-                  return Visibility(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(borderRadius),
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: widget.controller.searchHistory.length,
+              itemBuilder: (context, index) {
+                String searchTerm =
+                    widget.controller.searchHistory[index].searchTerm;
+                return Visibility(
                     visible: _showSuggestions,
                     maintainState: true,
                     child: Listener(
-                    onPointerDown: (event) {
-                      logging.e('Listener: Pointer Down');
-                    },
-                    child: InkWell(
-                      onTap: () {
-                        logging.e('InkWell: onTap');
-                        _searchBarTextFieldController.text = searchTerm;
-                        widget.onSearchTextChanged(searchTerm);
-                        widget.focusNode.unfocus();
-                      },
-                    child: ListTile(
-                      title: Text(searchTerm)
-                     ),
-                    )
-                   )
-                  );
-                },
-              ),
+                        onPointerDown: (event) {
+                          logging.i('Listener: Pointer Down');
+                        },
+                        child: InkWell(
+                          onTap: () {
+                            _searchBarTextFieldController.text = searchTerm;
+                            widget.onSearchTextChanged(searchTerm);
+                            widget.focusNode.unfocus();
+                          },
+                          child: ListTile(title: Text(searchTerm)),
+                        )));
+              },
             ),
+          ),
         ],
       ),
     );

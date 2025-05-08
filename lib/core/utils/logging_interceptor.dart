@@ -6,7 +6,6 @@ import 'package:logger/web.dart';
 // Copyright (c) 2025 SADev. All rights reserved.
 
 class LoggingInterceptor extends Interceptor {
-
   final logger = Get.find<Logger>();
 
   @override
@@ -15,7 +14,7 @@ class LoggingInterceptor extends Interceptor {
     logger.e('Headers:');
     options.headers.forEach((k, v) => logger.e('$k: $v'));
     logger.e('queryParameters: ${options.queryParameters}');
-      if (options.data != null) {
+    if (options.data != null) {
       logger.e('Body: ${options.data}');
     }
     logger.e('--> END ${options.method}');

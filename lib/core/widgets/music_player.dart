@@ -33,9 +33,10 @@ class MusicPlayerState extends State<MusicPlayer> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-  
+
     return Container(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+      padding:
+          const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         border: Border(top: BorderSide(color: Colors.grey[300]!)),
@@ -47,14 +48,15 @@ class MusicPlayerState extends State<MusicPlayer> {
             height: 58,
             margin: const EdgeInsets.only(right: 16.0),
             decoration: BoxDecoration(
-              color: Colors.grey[400], 
+              color: Colors.grey[400],
               image: DecorationImage(
                 image: NetworkImage(widget.result.artworkUrl100),
                 fit: BoxFit.cover,
                 onError: (exception, stackTrace) {
-                    logger.e('Error loading image: $exception');
-                    logger.e( 'Loading image from URL: ${widget.result.previewUrl}');
-                  },
+                  logger.e('Error loading image: $exception');
+                  logger
+                      .e('Loading image from URL: ${widget.result.previewUrl}');
+                },
               ),
             ),
           ),
@@ -65,22 +67,19 @@ class MusicPlayerState extends State<MusicPlayer> {
               children: [
                 Text(
                   widget.result.trackName,
-                  style: const TextStyle(
-                    fontSize: 16
-                  ),
+                  style: const TextStyle(fontSize: 16),
                 ),
-                Text(
-                  widget.result.artistName,
-                  style: theme.textTheme.bodyMedium
-                ),
+                Text(widget.result.artistName,
+                    style: theme.textTheme.bodyMedium),
               ],
             ),
           ),
           SizedBox(
-            width: 28.0, 
+            width: 28.0,
             height: 48.0,
             child: Obx(() {
-              final isPlaying = controller.isPlayingPreviewMap.value == widget.result.trackId;
+              final isPlaying =
+                  controller.isPlayingPreviewMap.value == widget.result.trackId;
               return IconButton(
                 icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
                 color: Colors.grey[800],

@@ -111,7 +111,8 @@ class SearchMusicController extends GetxController {
   ///
   /// Handles potential errors during playback and updates the [errorMessage]
   /// observable if an error occurs.
-  Future<void> playPreview(SearchResult result, {bool isReplayPreview = false}) async {
+  Future<void> playPreview(SearchResult result,
+      {bool isReplayPreview = false}) async {
     var id = result.trackId;
     var newPreviewUrl = result.previewUrl;
 
@@ -126,11 +127,12 @@ class SearchMusicController extends GetxController {
           pausePreview();
         }
         await player.setUrl(newPreviewUrl);
-      //Still playing preview and user click another new preview
-      } else if (!isPaused.value || previewingResult.value.previewUrl != newPreviewUrl) {
+        //Still playing preview and user click another new preview
+      } else if (!isPaused.value ||
+          previewingResult.value.previewUrl != newPreviewUrl) {
         //set new preview url
         await player.setUrl(newPreviewUrl);
-      } 
+      }
       player.play();
 
       player.playerStateStream.listen((state) {
@@ -144,10 +146,8 @@ class SearchMusicController extends GetxController {
 
       isPaused.value = false;
       previewingResult.value = result;
-
     } catch (e) {
       errorMessage.value = 'Failed to play preview: $e';
-      
     } finally {
       isLoadingPreviewSuccussMap.putIfAbsent(id, () => false.obs);
       isLoadingPreviewSuccussMap[id]!.value = true;

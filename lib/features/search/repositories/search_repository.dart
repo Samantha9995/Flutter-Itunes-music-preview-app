@@ -12,9 +12,9 @@ import 'package:logger/logger.dart';
 /// parses the JSON response, and returns a list of [SearchResult] objects.
 
 class SearchRepository {
-    /// The Dio client for making HTTP requests.
+  /// The Dio client for making HTTP requests.
   final Dio dio;
-    // Logger instance for logging
+  // Logger instance for logging
   final Logger logger = Get.find<Logger>();
 
   /// Constructor that requires a [Dio] client.
@@ -41,7 +41,8 @@ class SearchRepository {
 
         return results.map((json) => SearchResult.fromJson(json)).toList();
       } else {
-        throw Exception('Failed to load search results: ${response.statusCode}');
+        throw Exception(
+            'Failed to load search results: ${response.statusCode}');
       }
     } catch (e) {
       logger.e('Error during search: $e');

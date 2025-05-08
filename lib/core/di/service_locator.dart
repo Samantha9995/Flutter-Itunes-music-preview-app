@@ -10,7 +10,6 @@ import 'package:logger/logger.dart';
 // Copyright (c) 2025 SADev. All rights reserved.
 
 void setupService() {
-
   Get.put<Logger>(Logger());
 
   setUpDio();
@@ -20,8 +19,8 @@ void setupService() {
 
   Get.put<SearchRepository>(SearchRepository(dio: Get.find<Dio>()));
 
-  Get.put<SearchMusicController>(SearchMusicController(searchRepository: Get.find<SearchRepository>()));
-
+  Get.put<SearchMusicController>(
+      SearchMusicController(searchRepository: Get.find<SearchRepository>()));
 }
 
 void setUpDio() {

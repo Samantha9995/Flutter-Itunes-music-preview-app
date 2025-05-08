@@ -17,7 +17,8 @@ class HiveService extends GetxService {
         history.searchTerm.toLowerCase() == searchTerm.toLowerCase());
 
     if (!alreadyExists) {
-      final history = SearchHistoryModel(searchTerm: searchTerm, timestamp: DateTime.now());
+      final history =
+          SearchHistoryModel(searchTerm: searchTerm, timestamp: DateTime.now());
       await box.add(history);
     }
   }
@@ -28,7 +29,7 @@ class HiveService extends GetxService {
     // Sort by timestamp in descending order (newest first)
     allHistory.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
-    return allHistory.take(3).toList();// Limit to the last 10 entries
+    return allHistory.take(3).toList(); // Limit to the last 10 entries
   }
 
   Future<List<SearchHistoryModel>> findSearchHistory(String searchTerm) async {
@@ -38,8 +39,10 @@ class HiveService extends GetxService {
     allHistory.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
     // Find history items that include the search term
-    final List<SearchHistoryModel> matchingHistory = allHistory.where((history) =>
-        history.searchTerm.toLowerCase().contains(searchTerm.toLowerCase())).toList();
+    final List<SearchHistoryModel> matchingHistory = allHistory
+        .where((history) =>
+            history.searchTerm.toLowerCase().contains(searchTerm.toLowerCase()))
+        .toList();
 
     matchingHistory.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
@@ -47,7 +50,7 @@ class HiveService extends GetxService {
   }
 
   Future<void> clearSearchHistory() async {
-     final box = await Hive.openBox<SearchHistoryModel>(searchHistoryBoxName);
-     await box.clear();
+    final box = await Hive.openBox<SearchHistoryModel>(searchHistoryBoxName);
+    await box.clear();
   }
 }

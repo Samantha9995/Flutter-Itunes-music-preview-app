@@ -11,7 +11,7 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultStyle = Theme.of(context).textTheme.bodyMedium; 
+    final defaultStyle = Theme.of(context).textTheme.bodyMedium;
 
     return Text(
       text,
