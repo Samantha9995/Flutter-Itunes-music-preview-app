@@ -1,6 +1,6 @@
 {
-    "name": "itunes_music_app",
-    "short_name": "itunes_music_app",
+    "name": "Listen First",
+    "short_name": "Listen First",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FFFFFF",
