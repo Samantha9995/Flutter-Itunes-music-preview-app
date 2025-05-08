@@ -1,30 +1,64 @@
-# iTunes Music Search App
+# Listen First
 
-This is a Flutter app that allows users to search for music on iTunes and play previews.
+A Flutter application that allows users to search for music on the iTunes Store and play previews.
 
 ## Features
 
-*   Search for music by keyword
-*   View search results with track details (artist, album, artwork)
-*   Play music previews
-*   Error handling for network issues and invalid search terms
-*   Clean and responsive UI
+*   **Search Music:** Search for songs, artists, and albums on the iTunes Store.
+*   **Play Previews:** Listen to previews of the search results.
+*   **Search History:** View and manage your search history.
+*   **Localization:** Supports multiple languages (English and Chinese).
+*   **Cross-Platform:** Runs on Android, iOS, and Web.
 
 ## Technologies Used
 
-*   Flutter
-*   Dart
-*   GetX (state management)
-*   GetIt
-*   Dio (HTTP client)
-*   Just Audio (audio playback)
+*   **Flutter:** UI framework.
+*   **GetX:** State management and dependency injection.
+*   **EasyLocalization:** Internationalization and localization.
+*   **Hive:** Local data storage for search history.
+*   **Just Audio:** Audio playback.
+*   **Logger:** Logging.
 
 ## Getting Started
 
+1.  **Clone the repository:**
+
+    ```bash
+    git clone [repository_url]
+    ```
+2.  **Install dependencies:**
+
+    ```bash
+    flutter pub get
+    ```
+3.  **Run the app:**
+
+    ```bash
+    flutter run
+    ```
+
+## Localization
+
+The app supports English (en\_US) and Chinese (zh\_TW). Localization files are located in the `langs` directory.
+
+## State Management
+
+The app uses GetX for state management. Controllers are located in the `lib/features/search/controllers` directory.
+
+## Data Storage
+
+The app uses Hive for local data storage. The `SearchHistoryModel` is used to store search history.
+
+## Dependency Injection
+
+The app uses a service locator pattern for dependency injection. The `setupServiceLocator` function in `lib/core/di/service_locator.dart` sets up the dependencies.
+
 ### Prerequisites
 
-*   Flutter SDK (3.13.0 or higher)
-*   Dart SDK (3.2.0 or higher, included with Flutter)
+*   Flutter SDK (>=3.29.3, <4.0.0, includes Dart SDK >=3.7.2, <4.0.0)
+*   iOS: Xcode (version 12 or higher)
+*   Android SDK (API level 24 or higher)
+*   Chrome 135.0.7049.117 (x86_64) or higher
 *   An IDE like VS Code or Android Studio
 
 ### Installation
@@ -32,7 +66,7 @@ This is a Flutter app that allows users to search for music on iTunes and play p
 1.  Clone the repository:
 
     ```bash
-    git clone <your-repository-url>
+    git clone git@github.com:Samantha9995/ListenFirst.git
     ```
 
 2.  Navigate to the project directory:
@@ -65,14 +99,19 @@ itunes_music_app/
 │ │ └── service_locator.dart
 │ ├── models/
 │ │ └── search_result.dart
+│ │ └── search_history.dart
 │ ├── theme/
 │ │ └── itunes_theme.dart
+│ ├── services/
+│ │ └── hive_service.dart
 │ ├── utils/
 │ │ ├── constants.dart
 │ │ ├── logging_interceptor.dart
 │ │ └── styles.dart
 │ ├── widgets/
+│ │ ├── about_me.dart
 │ │ ├── custom_text.dart
+│ │ ├── music_player.dart
 │ │ ├── search_bar.dart
 │ │ └── search_result_tile.dart
 │ ├── features/
@@ -98,3 +137,15 @@ This app uses GetX for state management. Key controllers:
 ## API Integration
 
 The app uses the iTunes Search API to fetch music data. The `SearchRepository` class handles the API requests using the `Dio` package.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+## License
+
+Apache License Version 2.0
+
+## Copyright
+
+Copyright (c) 2025 SADev. All rights reserved.
