@@ -35,7 +35,7 @@ class AboutMePage extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 32.0),
               child: Text(
-                "Hey! I'm Samantha, an Android & Flutter Developer working on this iTunes music preview app. I'm passionate about building great mobile experiences and love discovering new music. Feel free to reach out! Check out my GitHub and I hope you enjoy using this app!",
+                "Hey! I'm Samantha, an Android & Flutter Developer working on this iTunes music preview app. I'm passionate about building great mobile experiences and love discovering new music. Feel free to reach out! Check out my GitHub and I hope you enjoy using Listen First!",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14),
               ),
