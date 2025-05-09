@@ -37,7 +37,7 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
   final FocusNode _focusNode = FocusNode();
 
   @override
-  void initState() {
+  void initState() { 
     super.initState();
     // Add this widget as an observer to the WidgetsBinding instance
     WidgetsBinding.instance.addObserver(this);
