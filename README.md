@@ -4,7 +4,7 @@ A Flutter application that allows users to search for music on the iTunes Store 
 
 ![Simulator Screen Recording - iPhone SE (3rd generation) - 2025-05-09 at 12 23 28](https://github.com/user-attachments/assets/8253476e-675c-48bc-952d-0b05c0c54c82)
 
-This project is deployed on GitHub Pages and can be accessed at: ListenFirst (https://samantha9995.github.io/ListenFirst/).
+This project is deployed on GitHub Pages and can be accessed at (https://samantha9995.github.io/ListenFirst/).
 
 ## Features
 
