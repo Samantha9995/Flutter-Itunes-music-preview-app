@@ -107,3 +107,4 @@ app.*.symbols
 .buildlog/
 .svn/
 migrate_working_dir/
+android/app/.cxx/Debug

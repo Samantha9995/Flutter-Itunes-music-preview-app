@@ -1,25 +1,33 @@
-import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:itunes_music_app/core/utils/logging_interceptor.dart';
-import 'package:itunes_music_app/features/search/repositories/search_repository.dart';
-import 'package:itunes_music_app/features/search/controllers/search_controller.dart';
+import 'package:listen_first/features/search/repositories/search_repository.dart';
+import 'package:listen_first/features/search/controllers/search_controller.dart';
 
+import 'package:listen_first/core/services/hive_service.dart';
+import 'package:logger/logger.dart';
 
-final GetIt locator = GetIt.instance;
+// Copyright (c) 2025 SADev. All rights reserved.
 
-void setupServiceLocator() {
+void setupService() {
+  Get.put<Logger>(Logger());
+
   setUpDio();
 
-  locator.registerSingleton<SearchRepository>(
-    SearchRepository(dio: locator<Dio>()),
-  );
+  // Register HiveService
+  Get.lazyPut<HiveService>(() => HiveService());
 
-   Get.put(SearchMusicController(searchRepository: locator<SearchRepository>()));
+  Get.put<SearchRepository>(SearchRepository(dio: Get.find<Dio>()));
+
+  Get.put<SearchMusicController>(
+      SearchMusicController(searchRepository: Get.find<SearchRepository>()));
 }
 
 void setUpDio() {
-  final dio = Dio();
-  dio.interceptors.add(LoggingInterceptor());
-  locator.registerSingleton<Dio>(dio);
+  final dio = Dio(BaseOptions(
+    baseUrl: 'https://itunes.apple.com',
+    connectTimeout: const Duration(seconds: 10),
+    receiveTimeout: const Duration(seconds: 10),
+  ));
+  // dio.interceptors.add(LoggingInterceptor());
+  Get.put<Dio>(dio);
 }

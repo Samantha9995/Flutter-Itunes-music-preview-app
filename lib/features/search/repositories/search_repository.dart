@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'dart:convert';
-import 'package:itunes_music_app/core/models/search_result.dart';
+import 'package:listen_first/core/models/search_result.dart';
+import 'package:logger/logger.dart';
+
+// Copyright (c) 2025 SADev. All rights reserved.
 
 /// Repository for performing music searches using the iTunes API.
 ///
@@ -8,10 +12,10 @@ import 'package:itunes_music_app/core/models/search_result.dart';
 /// parses the JSON response, and returns a list of [SearchResult] objects.
 
 class SearchRepository {
-    /// The Dio client for making HTTP requests.
+  /// The Dio client for making HTTP requests.
   final Dio dio;
-    /// The base URL for the iTunes API.
-  final String baseUrl = 'https://itunes.apple.com';
+  // Logger instance for logging
+  final Logger logger = Get.find<Logger>();
 
   /// Constructor that requires a [Dio] client.
   SearchRepository({required this.dio});
@@ -24,7 +28,7 @@ class SearchRepository {
   Future<List<SearchResult>> searchMusic(String searchTerm) async {
     try {
       final response = await dio.get(
-        '$baseUrl/search',
+        '/search',
         queryParameters: {
           'term': searchTerm,
           'entity': 'musicTrack',
@@ -37,10 +41,11 @@ class SearchRepository {
 
         return results.map((json) => SearchResult.fromJson(json)).toList();
       } else {
-        throw Exception('Failed to load search results: ${response.statusCode}');
+        throw Exception(
+            'Failed to load search results: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error during search: $e');
+      logger.e('Error during search: $e');
       throw Exception('Failed to connect to the server or invalid search term');
     }
   }

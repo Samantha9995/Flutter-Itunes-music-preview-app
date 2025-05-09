@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+// Copyright (c) 2025 SADev. All rights reserved.
+
 class CustomText extends StatelessWidget {
   final String text;
   final TextStyle? style;
@@ -9,7 +11,7 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultStyle = Theme.of(context).textTheme.bodyMedium; 
+    final defaultStyle = Theme.of(context).textTheme.bodyMedium;
 
     return Text(
       text,
