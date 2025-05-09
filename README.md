@@ -22,23 +22,6 @@ A Flutter application that allows users to search for music on the iTunes Store 
 *   **Just Audio:** Audio playback.
 *   **Logger:** Logging.
 
-## Getting Started
-
-1.  **Clone the repository:**
-
-    ```bash
-    git clone [repository_url]
-    ```
-2.  **Install dependencies:**
-
-    ```bash
-    flutter pub get
-    ```
-3.  **Run the app:**
-
-    ```bash
-    flutter run
-    ```
 
 ## Localization
 
