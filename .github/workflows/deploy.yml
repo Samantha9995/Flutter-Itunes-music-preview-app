@@ -28,4 +28,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
           destination_folder: . 
-          publish_branch: gh-pages-test
+          publish_branch: gh-pages
