@@ -5,7 +5,6 @@
 .packages
 .pub/
 .pub-cache/
-build/
 flutter_*.png
 linked_*.ds
 unlinked.ds
@@ -13,6 +12,12 @@ unlinked_spec.ds
 .flutter-plugins-dependencies
 .flutter-plugins
 pubspec.lock
+
+
+!build/
+build/*
+!build/web/
+!build/web/**/*
 
 # Android related
 **/android/**/gradle-wrapper.jar
