@@ -2,7 +2,7 @@
 
 A Flutter application that allows users to search for music on the iTunes Store and play previews.
 
-![Simulator Screen Recording - iPhone SE (3rd generation) - 2025-05-09 at 12 17 12](https://github.com/user-attachments/assets/053cd4b3-97bf-4349-b52a-e81c1a122069)
+![Simulator Screen Recording - iPhone SE (3rd generation) - 2025-05-09 at 12 23 28](https://github.com/user-attachments/assets/8253476e-675c-48bc-952d-0b05c0c54c82)
 
 
 ## Features
