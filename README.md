@@ -40,7 +40,7 @@ The app uses Hive for local data storage. The `SearchHistoryModel` is used to st
 
 The app uses a service locator pattern for dependency injection. The `setupServiceLocator` function in `lib/core/di/service_locator.dart` sets up the dependencies.
 
-### Prerequisites
+## Prerequisites
 
 *   Flutter SDK (>=3.29.3, <4.0.0, includes Dart SDK >=3.7.2, <4.0.0)
 *   iOS: Xcode (version 12 or higher)
@@ -48,7 +48,7 @@ The app uses a service locator pattern for dependency injection. The `setupServi
 *   Chrome 135.0.7049.117 (x86_64) or higher
 *   An IDE like VS Code or Android Studio
 
-### Installation
+## Installation
 
 1.  Clone the repository:
 
@@ -68,7 +68,7 @@ The app uses a service locator pattern for dependency injection. The `setupServi
     flutter pub get
     ```
 
-### Running the App
+## Running the App
 
 1.  Connect a physical device or start an emulator.
 2.  Run the app:
